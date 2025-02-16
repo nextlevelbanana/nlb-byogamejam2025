@@ -2,8 +2,9 @@ extends Node2D
 
 var kind 
 var isLocked = false
-var row
-var col
+var grid_pos
+var isHat = false
+var isTopHat = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,11 +17,14 @@ func _process(delta: float) -> void:
 func update_kind(newKind):
 	kind = newKind
 	$Symbol.animation = newKind
+	isHat = newKind in Constants.ALL_HATS
+	isTopHat = newKind in ["hatTop", "hatMid", "hatBottom"]		
 	
 func set_pos(row, column):
-	row = row
-	col = column
-	position = Vector2(Constants.GRID_ORIGIN.x + (row * Constants.CELL_SIZE), Constants.GRID_ORIGIN.y + (col * Constants.CELL_SIZE))
+	# I am continually getting confused by the fact that row is the y coord in the Vector2
+	#but it is. I promise
+	grid_pos = Vector2(column, row) 
+	position = Vector2(Constants.GRID_ORIGIN.x + (column * Constants.CELL_SIZE), Constants.GRID_ORIGIN.y + (row * Constants.CELL_SIZE))
 
 func update_lock(newState):
 	isLocked = newState
