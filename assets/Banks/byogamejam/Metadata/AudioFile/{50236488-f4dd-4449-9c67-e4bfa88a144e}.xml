@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{50236488-f4dd-4449-9c67-e4bfa88a144e}">
+		<property name="assetPath">
+			<value>Audio/error_008.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.13931972789115646</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{75c7845b-91db-407a-bada-74448b7cef16}</destination>
+		</relationship>
+	</object>
+</objects>
