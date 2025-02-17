@@ -9,6 +9,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_pressed():
-		SignalBus.game_started.emit()
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.is_pressed() and !event.is_echo():
+		if event.keycode == KEY_ESCAPE:
+			get_tree().quit()
+		else:
+			SignalBus.game_started.emit()

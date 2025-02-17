@@ -1,6 +1,8 @@
 extends Node
 
-const KINDS = ["hatBottom", "hatMid", "hatTop", "cherry"]
+const KINDS = ["hatBottom", "hatMid", "hatTop", "cherry", "baseballCap"]
+const ALL_HATS = ["hatTop", "hatMid", "hatBottom", "baseballCap"]
+const NON_HATS = ["cherry"]
 
 const CELL_SIZE = 128	
 const GRID_SIZE = 5
