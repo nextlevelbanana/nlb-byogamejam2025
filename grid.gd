@@ -224,7 +224,9 @@ func get_completed_top_hat(col):
 	if (cells[Constants.GRID_SIZE - 1][col].kind == "hatBottom"
 		&& cells[Constants.GRID_SIZE - 2][col].kind == "hatMid"):
 			if (cells[Constants.GRID_SIZE - 3][col].kind == "hatTop"):
-				top_hat_pieces.push_back([Vector2(col, Constants.GRID_SIZE - 1), Vector2(col, Constants.GRID_SIZE - 2), Vector2(col, Constants.GRID_SIZE - 3)])
+				top_hat_pieces.push_back(Vector2(col, Constants.GRID_SIZE - 1))
+				top_hat_pieces.push_back(Vector2(col, Constants.GRID_SIZE - 2))
+				top_hat_pieces.push_back(Vector2(col, Constants.GRID_SIZE - 3))
 			else:
 				pass
 				#todo: extend this logic to check for taller hats
@@ -233,7 +235,8 @@ func get_completed_top_hat(col):
 
 func _on_swap_selected():
 	#destroy all matches
-	#lock all complete hats
+	#lock all complete top hats
+	#lock all complete other hats
 	#refill all columns at once, from bottom row up
 	#repeat until no more matches and no more complete hats
 	#if all hats are complete, game over
@@ -246,9 +249,15 @@ func _on_swap_selected():
 			cells[cell_coords.y][cell_coords.x].update_kind(null)
 	
 	#todo: probably more animation here
-	
-	var new_hats = get_new_completed_hats()
-	for h in new_hats:
-		cells[Constants.GRID_SIZE - 1][h].update_lock(true)
+		
+	var columns_with_new_hats = get_new_completed_hats()
+	for h in columns_with_new_hats:
+		var cell = cells[Constants.GRID_SIZE - 1][h]
+		if cell.isTopHat:
+			var all_top_hat_pieces = get_completed_top_hat(h)
+			for piece in all_top_hat_pieces:
+				cells[piece.y][piece.x].update_lock(true)
+		else:
+			cell.update_lock(true)
 	
 	
