@@ -7,9 +7,12 @@ var Cell = preload("res://cell.tscn")
 var firstSelected
 var secondSelected
 
+var hats_complete = 0
+
 func _ready() -> void:
 	$Cursor.position = Constants.GRID_ORIGIN
 	initialize_grid()
+	SignalBus.connect("swap_selected", _on_swap_selected)
 
 func _process(delta: float) -> void:
 	pass
@@ -86,11 +89,12 @@ func clean_up_initial_cell_state():
 func tryConfirmSelection():
 	var cell_pos = getCell($Cursor.position)
 	print(cell_pos)
-	if !firstSelected:
+	if !firstSelected :
 		firstSelected = cells[cell_pos.y][cell_pos.x]
-		print(firstSelected.kind)
-		$FirstSelection.position = $Cursor.position
-		$FirstSelection.visible = true
+		if !firstSelected.isLocked:
+			$FirstSelection.position = $Cursor.position
+			$FirstSelection.visible = true
+		#todo: an else to indicate you can't select a locked hat
 	else:
 		#selecting the same cell twice un-selects it
 		if (firstSelected.grid_pos.y == cell_pos.y && firstSelected.grid_pos.x == cell_pos.x):
@@ -99,6 +103,8 @@ func tryConfirmSelection():
 			#todo: play WRONG buzzer, shake, etc
 			print("too far away")
 			#pass
+		elif cells[cell_pos.y][cell_pos.x].isLocked:
+			pass #todo: indicate you can't select a locked hat
 		else:
 			secondSelected = cells[cell_pos.y][cell_pos.x]
 			print("swapping!")
@@ -117,6 +123,8 @@ func swap():
 	cells[secondSelected.grid_pos.y][secondSelected.grid_pos.x].update_kind(tmp)
 	
 	reset_cursors()
+	SignalBus.swap_selected.emit()
+
 	
 #this is working
 func reset_cursors():
@@ -143,9 +151,13 @@ func get_matches():
 		var current_match = [ ]
 
 		while x < Constants.GRID_SIZE - 2:
-			var candidate = cells[y][x].kind
-			print("%s %s %s" % [y, x, candidate])
-			if cells[y][x+1].kind == candidate && cells[y][x+2].kind == candidate:
+			var candidate = cells[y][x]
+			var next_cell = cells[y][x+1]
+			var third_cell = cells[y][x+2]
+			
+			if (!candidate.isLocked && 
+					!next_cell.isLocked && next_cell.kind == candidate.kind &&
+						 !third_cell.isLocked && third_cell.kind == candidate.kind):
 				#found a match!
 				current_match.push_back(Vector2(x,y),)
 				current_match.push_back(Vector2(x+1, y))
@@ -153,7 +165,8 @@ func get_matches():
 				print("match found at %s" % x)
 				x = x +3
 				#need to check for matches of length 4+
-				while x < Constants.GRID_SIZE && candidate == cells[y][x].kind:
+				while (x < Constants.GRID_SIZE && 
+					candidate.kind == cells[y][x].kind && !cells[y][x].isLocked):
 					current_match.push_back(Vector2(x,y))
 					x = x + 1
 				#found the end of the match in this row, add it to the grand total
@@ -168,9 +181,12 @@ func get_matches():
 		var current_match = [ ]
 
 		while y < Constants.GRID_SIZE - 2:
-			var candidate = cells[y][x].kind
-			print("%s %s %s" % [y, x, candidate])
-			if cells[y+1][x].kind == candidate && cells[y+2][x].kind == candidate:
+			var candidate = cells[y][x]
+			var next_cell = cells[y+1][x]
+			var third_cell = cells[y+2][x]
+			if (!candidate.isLocked &&
+				!next_cell.isLocked && next_cell.kind == candidate.kind && 
+					!third_cell.isLocked && third_cell.kind == candidate.kind):
 				#found a match!
 				current_match.push_back(Vector2(x,y),)
 				current_match.push_back(Vector2(x, y+1))
@@ -178,7 +194,7 @@ func get_matches():
 				print("match found at %s" % y)
 				y = y +3
 				#need to check for matches of length 4+
-				while y < Constants.GRID_SIZE && candidate == cells[y][x].kind:
+				while y < Constants.GRID_SIZE && candidate.kind == cells[y][x].kind && !cells[y][x].isLocked:
 					current_match.push_back(Vector2(x,y))
 					y = y + 1
 				#found the end of the match in this row, add it to the grand total
@@ -214,3 +230,25 @@ func get_completed_top_hat(col):
 				#todo: extend this logic to check for taller hats
 				#todo: do we want to accept a 2-score hat?
 	return top_hat_pieces
+
+func _on_swap_selected():
+	#destroy all matches
+	#lock all complete hats
+	#refill all columns at once, from bottom row up
+	#repeat until no more matches and no more complete hats
+	#if all hats are complete, game over
+	
+	await get_tree().process_frame #todo: probably replace this with waiting for an animation to finish
+	var matches = get_matches()#this is a hack in place of a do while loop
+	
+	for m in matches:
+		for cell_coords in m:
+			cells[cell_coords.y][cell_coords.x].update_kind(null)
+	
+	#todo: probably more animation here
+	
+	var new_hats = get_new_completed_hats()
+	for h in new_hats:
+		cells[Constants.GRID_SIZE - 1][h].update_lock(true)
+	
+	

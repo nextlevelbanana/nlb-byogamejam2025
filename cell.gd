@@ -16,7 +16,10 @@ func _process(delta: float) -> void:
 
 func update_kind(newKind):
 	kind = newKind
-	$Symbol.animation = newKind
+	if !newKind:
+		$Symbol.visible = false
+	else:
+		$Symbol.animation = newKind
 	isHat = newKind in Constants.ALL_HATS
 	isTopHat = newKind in ["hatTop", "hatMid", "hatBottom"]		
 	
@@ -28,3 +31,5 @@ func set_pos(row, column):
 
 func update_lock(newState):
 	isLocked = newState
+	if isLocked:
+		$Symbol.modulate = "#3097b3"
