@@ -1,12 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://dsg4sh6vfpk78"]
+[gd_scene load_steps=8 format=3 uid="uid://dsg4sh6vfpk78"]
 
 [ext_resource type="Script" path="res://cell.gd" id="1_h3wb8"]
 [ext_resource type="Texture2D" uid="uid://ld11acivc3a4" path="res://art/cherry.png" id="2_1e478"]
+[ext_resource type="Texture2D" uid="uid://basglh33uuxid" path="res://art/ballcap.png" id="2_76e5u"]
 [ext_resource type="Texture2D" uid="uid://ba17clv5sg0x0" path="res://art/hatBottom.png" id="3_64byv"]
+[ext_resource type="Texture2D" uid="uid://xwtmbbpo0ato" path="res://art/hatMid.png" id="4_prvk6"]
 [ext_resource type="Texture2D" uid="uid://dymb4x17y1lgr" path="res://art/hatTop.png" id="4_yi7ln"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dxxrs"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_76e5u")
+}],
+"loop": true,
+"name": &"baseballCap",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_1e478")
@@ -25,7 +35,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_64byv")
+"texture": ExtResource("4_prvk6")
 }],
 "loop": true,
 "name": &"hatMid",
@@ -45,5 +55,5 @@ script = ExtResource("1_h3wb8")
 
 [node name="Symbol" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dxxrs")
-animation = &"cherry"
+animation = &"baseballCap"
 centered = false
