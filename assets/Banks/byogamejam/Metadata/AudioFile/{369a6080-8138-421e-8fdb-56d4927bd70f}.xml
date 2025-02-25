@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{369a6080-8138-421e-8fdb-56d4927bd70f}">
+		<property name="assetPath">
+			<value>Audio/drop_003.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.19108843537414966</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{75c7845b-91db-407a-bada-74448b7cef16}</destination>
+		</relationship>
+	</object>
+</objects>
