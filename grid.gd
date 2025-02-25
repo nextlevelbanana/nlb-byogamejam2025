@@ -143,7 +143,7 @@ func swap():
 	SignalBus.swap_selected.emit()
 
 func animate_swap(pos1, pos2):
-	var tween = get_tree().create_tween()
+	var tween = get_tree().create_tween().set_parallel(true)
 	tween.tween_property(secondSelected, "position", pos1, 0.5)
 	tween.tween_property(firstSelected, "position", pos2, 0.5)
 	await tween.finished
@@ -311,15 +311,25 @@ func find_next_lowest_not_empty(empty, column):
 			return i
 	return -1
 
-func refill_empty_cells():
 
+func drop_prev(row, column):
+	var tween = get_tree().create_tween().set_parallel(true)
+	var original_pos = preview_cells[column].position
+	tween.tween_property(preview_cells[column], "position", Vector2(original_pos.x, original_pos.y + Constants.CELL_SIZE), .5)
+	await tween.finished
+	return original_pos
+
+func refill_empty_cells():
 		for column in Constants.GRID_SIZE:
 			var cur = find_lowest_empty(column)
 			while cur != -1:
 				var fill = find_next_lowest_not_empty(cur, column)
 				if fill == -1:
+					var original_pos = await drop_prev(cur, column)
 					cells[cur][column].update_kind(preview_cells[column].kind)
+					preview_cells[column].position = original_pos
 					preview_cells[column].update_kind(Constants.KINDS.pick_random())
+
 				else:
 					cells[cur][column].update_kind(cells[fill][column].kind)
 					cells[fill][column].update_kind(null)
