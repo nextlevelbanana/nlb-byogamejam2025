@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bda3w446xf6er"]
+[gd_scene load_steps=6 format=3 uid="uid://bda3w446xf6er"]
 
 [ext_resource type="Script" path="res://parallax_background.gd" id="1_6bot5"]
-[ext_resource type="Texture2D" uid="uid://jmpuat6trwco" path="res://art/seamless_hd_landscape/parts/landscape_0005_6_background.png" id="1_cfb3y"]
-[ext_resource type="Texture2D" uid="uid://darbw2bth84ah" path="res://art/seamless_hd_landscape/parts/landscape_0004_5_clouds.png" id="3_xl31c"]
-[ext_resource type="Texture2D" uid="uid://g8ikwm3h7qn6" path="res://art/seamless_hd_landscape/parts/landscape_0003_4_mountain.png" id="4_khfu5"]
-[ext_resource type="Texture2D" uid="uid://gbi8d11jku11" path="res://art/seamless_hd_landscape/parts/landscape_0002_3_trees.png" id="5_vmsqh"]
-[ext_resource type="Texture2D" uid="uid://p3cphnkg5rar" path="res://art/seamless_hd_landscape/parts/landscape_0001_2_trees.png" id="6_5jcvs"]
-[ext_resource type="Texture2D" uid="uid://56xtt5g7rupp" path="res://art/seamless_hd_landscape/parts/landscape_0000_1_trees.png" id="7_aglhh"]
+[ext_resource type="Texture2D" uid="uid://bka047r0874e5" path="res://art/Background/sBackgroundD.png" id="2_v6bdf"]
+[ext_resource type="Texture2D" uid="uid://d3ukq6o5s72bp" path="res://art/Background/sBackgroundC.png" id="3_er7ea"]
+[ext_resource type="Texture2D" uid="uid://b0caqv00qka31" path="res://art/Background/sBackgroundB.png" id="4_ufjrv"]
+[ext_resource type="Texture2D" uid="uid://ypjwyyrsrhwr" path="res://art/Background/sBackgroundA.png" id="5_yxsu7"]
 
 [node name="Background" type="Node2D"]
 
@@ -16,47 +14,31 @@ script = ExtResource("1_6bot5")
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(1920, 0)
 
-[node name="Landscape00056Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(960, 540)
-scale = Vector2(1, 1)
-texture = ExtResource("1_cfb3y")
+[node name="SBackgroundD" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(960, 544)
+scale = Vector2(1, 1.0037)
+texture = ExtResource("2_v6bdf")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(1.5, 1)
-motion_mirroring = Vector2(1920, 0)
+motion_mirroring = Vector2(3840, 0)
 
-[node name="Landscape00045Clouds" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(960, 540)
-texture = ExtResource("3_xl31c")
+[node name="SBackgroundC" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(1920, 544)
+texture = ExtResource("3_er7ea")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(2, 1)
-motion_mirroring = Vector2(1920, 0)
+motion_mirroring = Vector2(5760, 0)
 
-[node name="Landscape00034Mountain" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
-position = Vector2(960, 544)
-texture = ExtResource("4_khfu5")
+[node name="SBackgroundB" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(2880, 544)
+texture = ExtResource("4_ufjrv")
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(2.5, 1)
-motion_mirroring = Vector2(1920, 0)
+motion_mirroring = Vector2(8000, 0)
 
-[node name="Landscape00023Trees" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
-position = Vector2(960, 544)
-texture = ExtResource("5_vmsqh")
-
-[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(3, 1)
-motion_mirroring = Vector2(1920, 0)
-
-[node name="Landscape00012Trees" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
-position = Vector2(960, 544)
-texture = ExtResource("6_5jcvs")
-
-[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(4, 1)
-motion_mirroring = Vector2(1920, 0)
-
-[node name="Landscape00001Trees" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
-position = Vector2(960, 544)
-texture = ExtResource("7_aglhh")
+[node name="SBackgroundA" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2(4008, 544)
+texture = ExtResource("5_yxsu7")

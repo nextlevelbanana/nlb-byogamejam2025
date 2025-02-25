@@ -59,3 +59,7 @@ func _play_match_made():
 
 func _play_button_click():
 	_play_audio_event("button_click")
+
+
+func _on_h_slider_value_changed(value: float) -> void:
+	pass # Replace with function body.
