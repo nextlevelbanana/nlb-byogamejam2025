@@ -7,3 +7,11 @@
 script = ExtResource("1_4db73")
 
 [node name="Title" parent="." instance=ExtResource("3_4l2wh")]
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 1000.0
+offset_top = 29.0
+offset_right = 1074.0
+offset_bottom = 52.0
+text = "Score: 🦴"

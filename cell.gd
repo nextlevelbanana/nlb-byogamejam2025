@@ -20,6 +20,8 @@ func update_kind(newKind):
 		$Symbol.visible = false
 	else:
 		$Symbol.animation = newKind
+		$Symbol.visible = true
+		$Symbol.play()
 	isHat = newKind in Constants.ALL_HATS
 	isTopHat = newKind in ["hatTop", "hatMid", "hatBottom"]		
 	

@@ -9,15 +9,20 @@ var secondSelected
 
 var hats_complete = 0
 
+var is_input_locked = false
+
 func _ready() -> void:
 	$Cursor.position = Constants.GRID_ORIGIN
 	initialize_grid()
 	SignalBus.connect("swap_selected", _on_swap_selected)
 
 func _process(delta: float) -> void:
-	pass
+	check_for_game_over()
 	
 func _unhandled_key_input(event: InputEvent) -> void:
+	if is_input_locked: 
+		return
+		
 	if event is InputEventKey and event.is_pressed():
 		if event.is_action_pressed("move_right"):
 			$Cursor.position.x = min($Cursor.position.x + Constants.CELL_SIZE, Constants.RIGHTMOST_COLUMN_LEFT_X)
@@ -53,10 +58,10 @@ func initialize_grid():
 	# and add them to the scene
 	for column in Constants.GRID_SIZE:
 		var preview = Constants.KINDS.pick_random()
-		preview_cells.append(preview)
 		var newCell = Cell.instantiate()
 		newCell.set_pos(-1, column)
 		newCell.update_kind(preview)
+		preview_cells.append(newCell)
 		newCell.add_to_group("previews")
 		add_child(newCell)
 		
@@ -88,7 +93,7 @@ func clean_up_initial_cell_state():
 #this is working
 func tryConfirmSelection():
 	var cell_pos = getCell($Cursor.position)
-	print(cell_pos)
+	
 	if !firstSelected :
 		firstSelected = cells[cell_pos.y][cell_pos.x]
 		if !firstSelected.isLocked:
@@ -107,6 +112,8 @@ func tryConfirmSelection():
 			pass #todo: indicate you can't select a locked hat
 		else:
 			secondSelected = cells[cell_pos.y][cell_pos.x]
+			$SecondSelection.position = $Cursor.position
+			$SecondSelection.visible = true
 			print("swapping!")
 			swap()
 
@@ -116,14 +123,31 @@ func getCell(cursor_pos):
 	
 #this is working
 func swap():
+	toggle_input_lock(true)
+
 	var tmp = firstSelected.kind
 	var tmp2 = secondSelected.kind
+	
+	var pos1 = firstSelected.position
+	var pos2 = secondSelected.position
+		
+	await animate_swap(pos1, pos2)
 
+	cells[firstSelected.grid_pos.y][firstSelected.grid_pos.x].position = pos1
+	cells[secondSelected.grid_pos.y][secondSelected.grid_pos.x].position = pos2
+	# I switched which cell gets to be tmp versus tmp2, but now it doesn't seem to be matching
 	cells[firstSelected.grid_pos.y][firstSelected.grid_pos.x].update_kind(tmp2)
 	cells[secondSelected.grid_pos.y][secondSelected.grid_pos.x].update_kind(tmp)
 	
 	reset_cursors()
 	SignalBus.swap_selected.emit()
+
+func animate_swap(pos1, pos2):
+	var tween = get_tree().create_tween()
+	tween.tween_property(secondSelected, "position", pos1, 0.5)
+	tween.tween_property(firstSelected, "position", pos2, 0.5)
+	await tween.finished
+	
 
 	
 #this is working
@@ -136,7 +160,7 @@ func reset_cursors():
 
 #this is working
 func refill_preview_cells():
-	for preview in get_tree().get_nodes_in_group("previews"):
+	for preview in preview_cells:
 		if !preview.kind:
 			preview.update_kind(Constants.KINDS.pick_random())
 		
@@ -172,7 +196,6 @@ func get_matches():
 				#found the end of the match in this row, add it to the grand total
 				matches.push_back(current_match)
 			else: # not a triad, check the next column
-				print("no match at %s"%x)
 				x = x + 1
 
 	#todo: find all vertical matches
@@ -200,7 +223,6 @@ func get_matches():
 				#found the end of the match in this row, add it to the grand total
 				matches.push_back(current_match)
 			else: # not a triad, check the next column
-				print("no match at %s"%y)
 				y = y + 1
 
 	return matches
@@ -232,6 +254,14 @@ func get_completed_top_hat(col):
 				#todo: extend this logic to check for taller hats
 				#todo: do we want to accept a 2-score hat?
 	return top_hat_pieces
+	
+func toggle_input_lock(newState):
+	if newState:
+		is_input_locked = true
+		$Cursor.visible = false
+	else:
+		is_input_locked = false
+		$Cursor.visible = true
 
 func _on_swap_selected():
 	#destroy all matches
@@ -241,7 +271,9 @@ func _on_swap_selected():
 	#repeat until no more matches and no more complete hats
 	#if all hats are complete, game over
 	
+	
 	await get_tree().process_frame #todo: probably replace this with waiting for an animation to finish
+	# not confident the matches are getting found correctly, think I'm seeing false positives
 	var matches = get_matches()#this is a hack in place of a do while loop
 	
 	for m in matches:
@@ -260,4 +292,49 @@ func _on_swap_selected():
 		else:
 			cell.update_lock(true)
 	
+	#await get_tree().process_frame #todo: probably replace this with waiting for an animation to finish
+	if matches.size():
+		refill_empty_cells()
+	
+	toggle_input_lock(false)
+
+func find_lowest_empty(column):
+	for i in range(Constants.GRID_SIZE -1, -1, -1):
+		if !cells[i][column].kind:
+			return i
+	#nothing empty in column
+	return -1
+
+func find_next_lowest_not_empty(empty, column):
+	for i in range(empty - 1, -1, -1):
+		if cells[i][column].kind != null:
+			return i
+	return -1
+
+func refill_empty_cells():
+
+		for column in Constants.GRID_SIZE:
+			var cur = find_lowest_empty(column)
+			while cur != -1:
+				var fill = find_next_lowest_not_empty(cur, column)
+				if fill == -1:
+					cells[cur][column].update_kind(preview_cells[column].kind)
+					preview_cells[column].update_kind(Constants.KINDS.pick_random())
+				else:
+					cells[cur][column].update_kind(cells[fill][column].kind)
+					cells[fill][column].update_kind(null)
+					await get_tree().process_frame
+				cur = cur - 1
+					
+
+# this isn't hooked up to anything yet				
+func check_for_game_over():
+	var is_over = true
+	for col in Constants.GRID_SIZE:
+		if !cells[Constants.GRID_SIZE - 1][col].isLocked:
+			is_over = false
+	
+	if is_over:
+		SignalBus.game_over.emit()
+		
 	

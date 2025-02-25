@@ -1,59 +1,172 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsg4sh6vfpk78"]
+[gd_scene load_steps=30 format=3 uid="uid://dsg4sh6vfpk78"]
 
 [ext_resource type="Script" path="res://cell.gd" id="1_h3wb8"]
-[ext_resource type="Texture2D" uid="uid://ld11acivc3a4" path="res://art/cherry.png" id="2_1e478"]
-[ext_resource type="Texture2D" uid="uid://basglh33uuxid" path="res://art/ballcap.png" id="2_76e5u"]
-[ext_resource type="Texture2D" uid="uid://ba17clv5sg0x0" path="res://art/hatBottom.png" id="3_64byv"]
-[ext_resource type="Texture2D" uid="uid://xwtmbbpo0ato" path="res://art/hatMid.png" id="4_prvk6"]
-[ext_resource type="Texture2D" uid="uid://dymb4x17y1lgr" path="res://art/hatTop.png" id="4_yi7ln"]
+[ext_resource type="Texture2D" uid="uid://bg8yrfe3b7wvj" path="res://art/items/Ball(4fps)/sBall0001.png" id="2_pohfr"]
+[ext_resource type="Texture2D" uid="uid://nucwatjxcltt" path="res://art/items/Ball(4fps)/sBall0002.png" id="3_se427"]
+[ext_resource type="Texture2D" uid="uid://bxxlyrgwx4xso" path="res://art/items/Ball(4fps)/sBall0003.png" id="4_vvsl5"]
+[ext_resource type="Texture2D" uid="uid://c6tuvwenhs0dx" path="res://art/items/Bone(4fps)/sBone0001.png" id="6_604vn"]
+[ext_resource type="Texture2D" uid="uid://bha8yau21vh6" path="res://art/items/Bone(4fps)/sBone0002.png" id="7_lpek4"]
+[ext_resource type="Texture2D" uid="uid://beewyfh8bfnei" path="res://art/items/Bone(4fps)/sBone0003.png" id="8_qxg8y"]
+[ext_resource type="Texture2D" uid="uid://urryw1yuboy2" path="res://art/items/Bowl(4fps)/sBowl0001.png" id="9_xu3ll"]
+[ext_resource type="Texture2D" uid="uid://cx8jfmvgl5pw8" path="res://art/items/Bowl(4fps)/sBowl0002.png" id="10_itvyh"]
+[ext_resource type="Texture2D" uid="uid://6v43yr2dtkoc" path="res://art/items/HatChef(4fps)/sHatChef0001.png" id="11_6hvae"]
+[ext_resource type="Texture2D" uid="uid://djq4fk5jbgfw" path="res://art/items/Bowl(4fps)/sBowl0003.png" id="11_rxhp0"]
+[ext_resource type="Texture2D" uid="uid://bp0rqhnxlr1h3" path="res://art/items/HatChef(4fps)/sHatChef0002.png" id="12_6lgvw"]
+[ext_resource type="Texture2D" uid="uid://bv2wtq3pjjpi8" path="res://art/items/HatChef(4fps)/sHatChef0003.png" id="13_jk8gk"]
+[ext_resource type="Texture2D" uid="uid://b5u8g5cm54er3" path="res://art/items/HatCowboy(4fps)/sHatCowboy0001.png" id="14_oul12"]
+[ext_resource type="Texture2D" uid="uid://3u0m3csmpeaw" path="res://art/items/HatCowboy(4fps)/sHatCowboy0002.png" id="15_pj2gv"]
+[ext_resource type="Texture2D" uid="uid://b0jgxkx8go0d2" path="res://art/items/HatCowboy(4fps)/sHatCowboy0003.png" id="16_3337j"]
+[ext_resource type="Texture2D" uid="uid://bov5wf1njsunv" path="res://art/items/HatTopA(4fps)/sHatTopA0001.png" id="17_5rhv7"]
+[ext_resource type="Texture2D" uid="uid://lsqva0thvtkt" path="res://art/items/HatParty(4fps)/sHatParty0001.png" id="17_lpwkl"]
+[ext_resource type="Texture2D" uid="uid://bjvrj7c2ttjmm" path="res://art/items/HatTopA(4fps)/sHatTopA0002.png" id="18_fsqtk"]
+[ext_resource type="Texture2D" uid="uid://bedkutyi6dluk" path="res://art/items/HatParty(4fps)/sHatParty0002.png" id="18_yd4uj"]
+[ext_resource type="Texture2D" uid="uid://q2hxwrm7oe3g" path="res://art/items/HatParty(4fps)/sHatParty0003.png" id="19_i7pnr"]
+[ext_resource type="Texture2D" uid="uid://ug5jbdkyhjcf" path="res://art/items/HatTopA(4fps)/sHatTopA0003.png" id="19_kr7wm"]
+[ext_resource type="Texture2D" uid="uid://cqwlcesq5ssha" path="res://art/items/HatTopB(4fps)/sHatTopB0001.png" id="20_mxtp0"]
+[ext_resource type="Texture2D" uid="uid://c4ihaxv3kajd7" path="res://art/items/HatTopB(4fps)/sHatTopB0002.png" id="21_y2mlr"]
+[ext_resource type="Texture2D" uid="uid://po1pwf4yfyvg" path="res://art/items/HatTopB(4fps)/sHatTopB0003.png" id="22_lrkvg"]
+[ext_resource type="Texture2D" uid="uid://cyny71a4lc4xl" path="res://art/items/HatTopC(4fps)/sHatTopC0001.png" id="23_hou3w"]
+[ext_resource type="Texture2D" uid="uid://bjf7rrixj1nd2" path="res://art/items/HatTopC(4fps)/sHatTopC0002.png" id="24_3c5vj"]
+[ext_resource type="Texture2D" uid="uid://diaf18mfatpmh" path="res://art/items/HatTopC(4fps)/sHatTopC0003.png" id="25_qfryh"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_dxxrs"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_mwqqk"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_76e5u")
+"texture": ExtResource("2_pohfr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_se427")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vvsl5")
 }],
 "loop": true,
-"name": &"baseballCap",
-"speed": 5.0
+"name": &"ball",
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_1e478")
+"texture": ExtResource("6_604vn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lpek4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qxg8y")
 }],
 "loop": true,
-"name": &"cherry",
-"speed": 5.0
+"name": &"bone",
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_64byv")
+"texture": ExtResource("9_xu3ll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_itvyh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_rxhp0")
+}],
+"loop": true,
+"name": &"bowl",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_6hvae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_6lgvw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_jk8gk")
+}],
+"loop": true,
+"name": &"chef",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_oul12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_pj2gv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_3337j")
+}],
+"loop": true,
+"name": &"cowboy",
+"speed": 4.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_5rhv7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_fsqtk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_kr7wm")
 }],
 "loop": true,
 "name": &"hatBottom",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_prvk6")
+"texture": ExtResource("20_mxtp0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_y2mlr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_lrkvg")
 }],
 "loop": true,
 "name": &"hatMid",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_yi7ln")
+"texture": ExtResource("23_hou3w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_3c5vj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_qfryh")
 }],
 "loop": true,
 "name": &"hatTop",
-"speed": 5.0
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_lpwkl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_yd4uj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_i7pnr")
+}],
+"loop": true,
+"name": &"party",
+"speed": 4.0
 }]
 
 [node name="Cell" type="Node2D"]
 script = ExtResource("1_h3wb8")
 
 [node name="Symbol" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_dxxrs")
-animation = &"baseballCap"
+sprite_frames = SubResource("SpriteFrames_mwqqk")
+animation = &"party"
 centered = false
