@@ -234,12 +234,16 @@ func get_new_completed_hats():
 	var hat_matches = []
 	for column in Constants.GRID_SIZE:
 		var current_cell = cells[Constants.GRID_SIZE - 1][column]
+		print(current_cell.isLocked, current_cell.isHat)
 		if !current_cell.isLocked && current_cell.isHat:
 			if current_cell.isTopHat:
 				if get_completed_top_hat(column).size():
+					print("hat found at %s" % column)
 					hat_matches.push_back(column)
 			else:
+				print("hat found at %s" % column)
 				hat_matches.push_back(column)
+		
 	return hat_matches
 
 # assumes column is unlocked
@@ -270,21 +274,52 @@ func toggle_input_lock(newState):
 		is_input_locked = false
 		$Cursor.visible = true
 
-func _on_swap_selected():
-	#destroy all matches
-	#lock all complete top hats
-	#lock all complete other hats
-	#refill all columns at once, from bottom row up
-	#repeat until no more matches and no more complete hats
-	#if all hats are complete, game over
-	
-	
+func _on_swap_selected():	
 	await get_tree().process_frame #todo: probably replace this with waiting for an animation to finish
 	# not confident the matches are getting found correctly, think I'm seeing false positives
 	
+	var should_check_again = false
 	
 	var columns_with_new_hats = get_new_completed_hats()
-	for h in columns_with_new_hats:
+	if columns_with_new_hats.size():
+		print("new hat found")
+		should_check_again = true
+		lock_hats_in_columns(columns_with_new_hats)
+	
+	await get_tree().process_frame
+	
+	var matches = get_matches()#this is a hack in place of a do while loop
+	
+	#await get_tree().process_frame #todo: probably replace this with waiting for an animation to finish
+	if matches.size():
+		should_check_again = true
+		for m in matches:
+			for cell_coords in m:
+				cells[cell_coords.y][cell_coords.x].update_kind(null)
+		refill_empty_cells()
+		
+	while should_check_again:
+		print("checking again")
+		await get_tree().process_frame
+		columns_with_new_hats = get_new_completed_hats()
+		print("columns with new hats?", columns_with_new_hats.size())
+		if columns_with_new_hats.size():
+			lock_hats_in_columns(columns_with_new_hats)
+			
+		matches = get_matches()
+		if !matches.size():
+			should_check_again = false
+		else:
+			should_check_again = true
+			for m in matches:
+				for cell_coords in m:
+					cells[cell_coords.y][cell_coords.x].update_kind(null)
+			refill_empty_cells()
+	
+	toggle_input_lock(false)
+
+func lock_hats_in_columns(col):
+	for h in col:
 		var cell = cells[Constants.GRID_SIZE - 1][h]
 		if cell.isTopHat:
 			var all_top_hat_pieces = get_completed_top_hat(h)
@@ -292,19 +327,6 @@ func _on_swap_selected():
 				cells[piece.y][piece.x].update_lock(true)
 		else:
 			cell.update_lock(true)
-	await get_tree().process_frame
-	
-	var matches = get_matches()#this is a hack in place of a do while loop
-	
-	for m in matches:
-		for cell_coords in m:
-			cells[cell_coords.y][cell_coords.x].update_kind(null)
-	
-	#await get_tree().process_frame #todo: probably replace this with waiting for an animation to finish
-	if matches.size():
-		refill_empty_cells()
-	
-	toggle_input_lock(false)
 
 func find_lowest_empty(column):
 	for i in range(Constants.GRID_SIZE -1, -1, -1):
@@ -328,23 +350,21 @@ func drop_prev(row, column):
 	return original_pos
 
 func refill_empty_cells():
-		for column in Constants.GRID_SIZE:
-			var cur = find_lowest_empty(column)
-			while cur != -1:
-				var fill = find_next_lowest_not_empty(cur, column)
-				if fill == -1:
-					var original_pos = await drop_prev(cur, column)
-					cells[cur][column].update_kind(preview_cells[column].kind)
-					preview_cells[column].position = original_pos
-					preview_cells[column].update_kind(Constants.KINDS.pick_random())
-
-				else:
-					cells[cur][column].update_kind(cells[fill][column].kind)
-					cells[fill][column].update_kind(null)
-					await get_tree().process_frame
-				cur = cur - 1
-					
-
+	for column in Constants.GRID_SIZE:
+		var cur = find_lowest_empty(column)
+		while cur != -1:
+			var fill = find_next_lowest_not_empty(cur, column)
+			if fill == -1:
+				var original_pos = await drop_prev(cur, column)
+				cells[cur][column].update_kind(preview_cells[column].kind)
+				preview_cells[column].position = original_pos
+				preview_cells[column].update_kind(Constants.KINDS.pick_random())
+			else:
+				cells[cur][column].update_kind(cells[fill][column].kind)
+				cells[fill][column].update_kind(null)
+				await get_tree().process_frame
+			cur = cur - 1
+	
 # this isn't hooked up to anything yet				
 func check_for_game_over():
 	var is_over = true
