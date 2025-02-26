@@ -235,7 +235,10 @@ func get_new_completed_hats():
 	for column in Constants.GRID_SIZE:
 		var current_cell = cells[Constants.GRID_SIZE - 1][column]
 		if !current_cell.isLocked && current_cell.isHat:
-			if get_completed_top_hat(column).size() || !current_cell.isTopHat:
+			if current_cell.isTopHat:
+				if get_completed_top_hat(column).size():
+					hat_matches.push_back(column)
+			else:
 				hat_matches.push_back(column)
 	return hat_matches
 
@@ -243,16 +246,20 @@ func get_new_completed_hats():
 # returns the coords of all top hat pieces, or an empty array if hat incomplete, in a given column
 func get_completed_top_hat(col):
 	var top_hat_pieces = []
-	if (cells[Constants.GRID_SIZE - 1][col].kind == "hatBottom"
-		&& cells[Constants.GRID_SIZE - 2][col].kind == "hatMid"):
-			if (cells[Constants.GRID_SIZE - 3][col].kind == "hatTop"):
-				top_hat_pieces.push_back(Vector2(col, Constants.GRID_SIZE - 1))
-				top_hat_pieces.push_back(Vector2(col, Constants.GRID_SIZE - 2))
-				top_hat_pieces.push_back(Vector2(col, Constants.GRID_SIZE - 3))
+	if cells[Constants.GRID_SIZE - 1][col].kind == "hatBottom" && cells[Constants.GRID_SIZE - 2][col].kind == "hatMid":
+		var shouldContinue = true
+		var row = Constants.GRID_SIZE - 3
+		while shouldContinue && row > -1:
+			if cells[row][col].kind == "hatMid":
+				row = row - 1
+			elif cells[row][col].kind == "hatTop":
+				#we've completed the hat!
+				for n in range(Constants.GRID_SIZE - 1, row - 1, -1):
+					top_hat_pieces.push_back(Vector2(col, n))
+				shouldContinue = false
 			else:
-				pass
-				#todo: extend this logic to check for taller hats
-				#todo: do we want to accept a 2-score hat?
+				#there's not a hat here
+				shouldContinue = false
 	return top_hat_pieces
 	
 func toggle_input_lock(newState):
@@ -274,14 +281,8 @@ func _on_swap_selected():
 	
 	await get_tree().process_frame #todo: probably replace this with waiting for an animation to finish
 	# not confident the matches are getting found correctly, think I'm seeing false positives
-	var matches = get_matches()#this is a hack in place of a do while loop
 	
-	for m in matches:
-		for cell_coords in m:
-			cells[cell_coords.y][cell_coords.x].update_kind(null)
 	
-	#todo: probably more animation here
-		
 	var columns_with_new_hats = get_new_completed_hats()
 	for h in columns_with_new_hats:
 		var cell = cells[Constants.GRID_SIZE - 1][h]
@@ -291,6 +292,13 @@ func _on_swap_selected():
 				cells[piece.y][piece.x].update_lock(true)
 		else:
 			cell.update_lock(true)
+	await get_tree().process_frame
+	
+	var matches = get_matches()#this is a hack in place of a do while loop
+	
+	for m in matches:
+		for cell_coords in m:
+			cells[cell_coords.y][cell_coords.x].update_kind(null)
 	
 	#await get_tree().process_frame #todo: probably replace this with waiting for an animation to finish
 	if matches.size():
