@@ -93,13 +93,15 @@ func clean_up_initial_cell_state():
 #this is working
 func tryConfirmSelection():
 	var cell_pos = getCell($Cursor.position)
+	var cur = cells[cell_pos.y][cell_pos.x]
+	if cur.isLocked:
+		return #todo: animation, sound etc to indicate you can't select a locked hat
 	
-	if !firstSelected :
-		firstSelected = cells[cell_pos.y][cell_pos.x]
-		if !firstSelected.isLocked:
-			$FirstSelection.position = $Cursor.position
-			$FirstSelection.visible = true
-		#todo: an else to indicate you can't select a locked hat
+	if !firstSelected:
+		firstSelected = cur
+		$FirstSelection.position = $Cursor.position
+		$FirstSelection.visible = true
+		#todo: an else 
 	else:
 		#selecting the same cell twice un-selects it
 		if (firstSelected.grid_pos.y == cell_pos.y && firstSelected.grid_pos.x == cell_pos.x):
@@ -108,10 +110,8 @@ func tryConfirmSelection():
 			#todo: play WRONG buzzer, shake, etc
 			print("too far away")
 			#pass
-		elif cells[cell_pos.y][cell_pos.x].isLocked:
-			pass #todo: indicate you can't select a locked hat
 		else:
-			secondSelected = cells[cell_pos.y][cell_pos.x]
+			secondSelected = cur
 			$SecondSelection.position = $Cursor.position
 			$SecondSelection.visible = true
 			print("swapping!")
