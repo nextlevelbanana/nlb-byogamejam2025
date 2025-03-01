@@ -7,14 +7,24 @@ var Cell = preload("res://cell.tscn")
 var firstSelected
 var secondSelected
 
+var hats_complete = 0
+
+var is_input_locked = false
+
+var PoofScene = preload("res://poof.tscn")
+
 func _ready() -> void:
 	$Cursor.position = Constants.GRID_ORIGIN
 	initialize_grid()
+	SignalBus.connect("swap_selected", _on_swap_selected)
 
 func _process(delta: float) -> void:
-	pass
+	check_for_game_over()
 	
 func _unhandled_key_input(event: InputEvent) -> void:
+	if is_input_locked: 
+		return
+		
 	if event is InputEventKey and event.is_pressed():
 		if event.is_action_pressed("move_right"):
 			$Cursor.position.x = min($Cursor.position.x + Constants.CELL_SIZE, Constants.RIGHTMOST_COLUMN_LEFT_X)
@@ -50,10 +60,10 @@ func initialize_grid():
 	# and add them to the scene
 	for column in Constants.GRID_SIZE:
 		var preview = Constants.KINDS.pick_random()
-		preview_cells.append(preview)
 		var newCell = Cell.instantiate()
 		newCell.set_pos(-1, column)
 		newCell.update_kind(preview)
+		preview_cells.append(newCell)
 		newCell.add_to_group("previews")
 		add_child(newCell)
 		
@@ -85,12 +95,15 @@ func clean_up_initial_cell_state():
 #this is working
 func tryConfirmSelection():
 	var cell_pos = getCell($Cursor.position)
-	print(cell_pos)
+	var cur = cells[cell_pos.y][cell_pos.x]
+	if cur.isLocked:
+		return #todo: animation, sound etc to indicate you can't select a locked hat
+	
 	if !firstSelected:
-		firstSelected = cells[cell_pos.y][cell_pos.x]
-		print(firstSelected.kind)
+		firstSelected = cur
 		$FirstSelection.position = $Cursor.position
 		$FirstSelection.visible = true
+		#todo: an else 
 	else:
 		#selecting the same cell twice un-selects it
 		if (firstSelected.grid_pos.y == cell_pos.y && firstSelected.grid_pos.x == cell_pos.x):
@@ -100,7 +113,9 @@ func tryConfirmSelection():
 			print("too far away")
 			#pass
 		else:
-			secondSelected = cells[cell_pos.y][cell_pos.x]
+			secondSelected = cur
+			$SecondSelection.position = $Cursor.position
+			$SecondSelection.visible = true
 			print("swapping!")
 			swap()
 
@@ -110,13 +125,32 @@ func getCell(cursor_pos):
 	
 #this is working
 func swap():
+	toggle_input_lock(true)
+
 	var tmp = firstSelected.kind
 	var tmp2 = secondSelected.kind
+	
+	var pos1 = firstSelected.position
+	var pos2 = secondSelected.position
+		
+	await animate_swap(pos1, pos2)
 
+	cells[firstSelected.grid_pos.y][firstSelected.grid_pos.x].position = pos1
+	cells[secondSelected.grid_pos.y][secondSelected.grid_pos.x].position = pos2
+	# I switched which cell gets to be tmp versus tmp2, but now it doesn't seem to be matching
 	cells[firstSelected.grid_pos.y][firstSelected.grid_pos.x].update_kind(tmp2)
 	cells[secondSelected.grid_pos.y][secondSelected.grid_pos.x].update_kind(tmp)
 	
 	reset_cursors()
+	SignalBus.swap_selected.emit()
+
+func animate_swap(pos1, pos2):
+	var tween = get_tree().create_tween().set_parallel(true)
+	tween.tween_property(secondSelected, "position", pos1, 0.5)
+	tween.tween_property(firstSelected, "position", pos2, 0.5)
+	await tween.finished
+	
+
 	
 #this is working
 func reset_cursors():
@@ -128,7 +162,7 @@ func reset_cursors():
 
 #this is working
 func refill_preview_cells():
-	for preview in get_tree().get_nodes_in_group("previews"):
+	for preview in preview_cells:
 		if !preview.kind:
 			preview.update_kind(Constants.KINDS.pick_random())
 		
@@ -143,9 +177,13 @@ func get_matches():
 		var current_match = [ ]
 
 		while x < Constants.GRID_SIZE - 2:
-			var candidate = cells[y][x].kind
-			print("%s %s %s" % [y, x, candidate])
-			if cells[y][x+1].kind == candidate && cells[y][x+2].kind == candidate:
+			var candidate = cells[y][x]
+			var next_cell = cells[y][x+1]
+			var third_cell = cells[y][x+2]
+			
+			if (!candidate.isLocked && 
+					!next_cell.isLocked && next_cell.kind == candidate.kind &&
+						 !third_cell.isLocked && third_cell.kind == candidate.kind):
 				#found a match!
 				current_match.push_back(Vector2(x,y),)
 				current_match.push_back(Vector2(x+1, y))
@@ -153,13 +191,13 @@ func get_matches():
 				print("match found at %s" % x)
 				x = x +3
 				#need to check for matches of length 4+
-				while x < Constants.GRID_SIZE && candidate == cells[y][x].kind:
+				while (x < Constants.GRID_SIZE && 
+					candidate.kind == cells[y][x].kind && !cells[y][x].isLocked):
 					current_match.push_back(Vector2(x,y))
 					x = x + 1
 				#found the end of the match in this row, add it to the grand total
 				matches.push_back(current_match)
 			else: # not a triad, check the next column
-				print("no match at %s"%x)
 				x = x + 1
 
 	#todo: find all vertical matches
@@ -168,9 +206,12 @@ func get_matches():
 		var current_match = [ ]
 
 		while y < Constants.GRID_SIZE - 2:
-			var candidate = cells[y][x].kind
-			print("%s %s %s" % [y, x, candidate])
-			if cells[y+1][x].kind == candidate && cells[y+2][x].kind == candidate:
+			var candidate = cells[y][x]
+			var next_cell = cells[y+1][x]
+			var third_cell = cells[y+2][x]
+			if (!candidate.isLocked &&
+				!next_cell.isLocked && next_cell.kind == candidate.kind && 
+					!third_cell.isLocked && third_cell.kind == candidate.kind):
 				#found a match!
 				current_match.push_back(Vector2(x,y),)
 				current_match.push_back(Vector2(x, y+1))
@@ -178,13 +219,12 @@ func get_matches():
 				print("match found at %s" % y)
 				y = y +3
 				#need to check for matches of length 4+
-				while y < Constants.GRID_SIZE && candidate == cells[y][x].kind:
+				while y < Constants.GRID_SIZE && candidate.kind == cells[y][x].kind && !cells[y][x].isLocked:
 					current_match.push_back(Vector2(x,y))
 					y = y + 1
 				#found the end of the match in this row, add it to the grand total
 				matches.push_back(current_match)
 			else: # not a triad, check the next column
-				print("no match at %s"%y)
 				y = y + 1
 
 	return matches
@@ -197,20 +237,162 @@ func get_new_completed_hats():
 	for column in Constants.GRID_SIZE:
 		var current_cell = cells[Constants.GRID_SIZE - 1][column]
 		if !current_cell.isLocked && current_cell.isHat:
-			if get_completed_top_hat(column).size() || !current_cell.isTopHat:
+			if current_cell.isTopHat:
+				if get_completed_top_hat(column).size():
+					print("hat found at %s" % column)
+					hat_matches.push_back(column)
+			else:
+				print("hat found at %s" % column)
 				hat_matches.push_back(column)
+		
 	return hat_matches
 
 # assumes column is unlocked
 # returns the coords of all top hat pieces, or an empty array if hat incomplete, in a given column
 func get_completed_top_hat(col):
 	var top_hat_pieces = []
-	if (cells[Constants.GRID_SIZE - 1][col].kind == "hatBottom"
-		&& cells[Constants.GRID_SIZE - 2][col].kind == "hatMid"):
-			if (cells[Constants.GRID_SIZE - 3][col].kind == "hatTop"):
-				top_hat_pieces.push_back([Vector2(col, Constants.GRID_SIZE - 1), Vector2(col, Constants.GRID_SIZE - 2), Vector2(col, Constants.GRID_SIZE - 3)])
+	if cells[Constants.GRID_SIZE - 1][col].kind == "hatBottom" && cells[Constants.GRID_SIZE - 2][col].kind == "hatMid":
+		var shouldContinue = true
+		var row = Constants.GRID_SIZE - 3
+		while shouldContinue && row > -1:
+			if cells[row][col].kind == "hatMid":
+				row = row - 1
+			elif cells[row][col].kind == "hatTop":
+				#we've completed the hat!
+				for n in range(Constants.GRID_SIZE - 1, row - 1, -1):
+					top_hat_pieces.push_back(Vector2(col, n))
+				shouldContinue = false
 			else:
-				pass
-				#todo: extend this logic to check for taller hats
-				#todo: do we want to accept a 2-score hat?
+				#there's not a hat here
+				shouldContinue = false
 	return top_hat_pieces
+	
+func toggle_input_lock(newState):
+	if newState:
+		is_input_locked = true
+		$Cursor.visible = false
+	else:
+		is_input_locked = false
+		$Cursor.visible = true
+
+func _on_swap_selected():	
+	await get_tree().process_frame #todo: probably replace this with waiting for an animation to finish
+	# not confident the matches are getting found correctly, think I'm seeing false positives
+	
+	var should_check_again = false
+	
+	var columns_with_new_hats = get_new_completed_hats()
+	if columns_with_new_hats.size():
+		print("new hat found")
+		lock_hats_in_columns(columns_with_new_hats)
+	
+	await get_tree().process_frame
+	
+	var matches = get_matches()#this is a hack in place of a do while loop
+	
+	#await get_tree().process_frame #todo: probably replace this with waiting for an animation to finish
+	if matches.size():
+		should_check_again = true
+		for m in matches:
+			for cell_coords in m:
+				await poof (cells[cell_coords.y][cell_coords.x].position)
+				cells[cell_coords.y][cell_coords.x].update_kind(null)
+		refill_empty_cells()
+		
+	while should_check_again:
+		print("checking again")
+		await get_tree().process_frame
+		columns_with_new_hats = get_new_completed_hats()
+		print("columns with new hats?", columns_with_new_hats.size())
+		if columns_with_new_hats.size():
+			lock_hats_in_columns(columns_with_new_hats)
+			
+		matches = get_matches()
+		print("matches found: %s" % matches.size())
+		if !matches.size():
+			should_check_again = false
+		else:
+			should_check_again = true
+			for m in matches:
+				for cell_coords in m:
+					cells[cell_coords.y][cell_coords.x].update_kind(null)
+			refill_empty_cells()
+	
+	toggle_input_lock(false)
+
+func lock_hats_in_columns(col):
+	for h in col:
+		var cell = cells[Constants.GRID_SIZE - 1][h]
+		if cell.isTopHat:
+			var all_top_hat_pieces = get_completed_top_hat(h)
+			for piece in all_top_hat_pieces:
+				cells[piece.y][piece.x].update_lock(true)
+			SignalBus.top_hat_made.emit()
+		else:
+			SignalBus.bad_hat_made.emit()
+			cell.update_lock(true)
+
+func find_lowest_empty(column):
+	for i in range(Constants.GRID_SIZE -1, -1, -1):
+		if !cells[i][column].kind:
+			return i
+	#nothing empty in column
+	return -1
+
+func find_next_lowest_not_empty(empty, column):
+	for i in range(empty - 1, -1, -1):
+		if cells[i][column].kind != null:
+			return i
+	return -1
+
+
+func drop_prev(row, column):
+	var tween = get_tree().create_tween().set_parallel(true)
+	var original_pos = preview_cells[column].position
+	tween.tween_property(preview_cells[column], "position", Vector2(original_pos.x, original_pos.y + Constants.CELL_SIZE), .5)
+	await tween.finished
+	return original_pos
+	
+func drop_in_grid(row, column):
+	var tween = get_tree().create_tween().set_parallel(true)
+	var original_pos = cells[row][column].position
+	tween.tween_property(cells[row][column], "position", Vector2(original_pos.x, original_pos.y + Constants.CELL_SIZE), .5)
+	await tween.finished
+	return original_pos
+
+func poof (pos): 
+	print(pos)
+	var new_poof = PoofScene.instantiate()
+	new_poof.position = pos
+	add_child(new_poof)
+
+func refill_empty_cells():
+	print("refilling empty cells")
+	for column in Constants.GRID_SIZE:
+		var cur = find_lowest_empty(column)
+		while cur != -1:
+			var fill = find_next_lowest_not_empty(cur, column)
+			if fill == -1:
+				var original_pos = await drop_prev(cur, column)
+				cells[cur][column].update_kind(preview_cells[column].kind)
+				preview_cells[column].position = original_pos
+				preview_cells[column].update_kind(Constants.KINDS.pick_random())
+			else:
+				#var original_pos = await drop_in_grid(fill, column)
+				cells[cur][column].update_kind(cells[fill][column].kind)
+				#cells[fill][column].position = original_pos
+				cells[fill][column].update_kind(null)
+				await get_tree().process_frame
+			cur = cur - 1
+	
+# this isn't hooked up to anything yet				
+func check_for_game_over():
+	var is_over = true
+	for col in Constants.GRID_SIZE:
+		if !cells[Constants.GRID_SIZE - 1][col].isLocked:
+			is_over = false
+	
+	if is_over:
+		SignalBus.game_over.emit()
+		
+	

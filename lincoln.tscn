@@ -1,0 +1,215 @@
+[gd_scene load_steps=49 format=3 uid="uid://7btbw25mt22o"]
+
+[ext_resource type="Texture2D" uid="uid://cmnaldl2ivxo0" path="res://art/dogs/Lincoln (4fps)/sLincoln0001.png" id="1_8hlwk"]
+[ext_resource type="Texture2D" uid="uid://5hbd43m2e0ef" path="res://art/dogs/Lincoln (4fps)/sLincoln0002.png" id="2_ddjkk"]
+[ext_resource type="Texture2D" uid="uid://cj4k8ik6kc3kd" path="res://art/dogs/Lincoln (4fps)/sLincoln0003.png" id="3_48hwq"]
+[ext_resource type="Texture2D" uid="uid://dmutau31jdexd" path="res://art/dogs/Lincoln (4fps)/sLincoln0004.png" id="4_puqgw"]
+[ext_resource type="Texture2D" uid="uid://djdsfpf6bag54" path="res://art/dogs/Lincoln (4fps)/sLincoln0005.png" id="5_7y88v"]
+[ext_resource type="Texture2D" uid="uid://bv4sjraujs1kx" path="res://art/dogs/Lincoln (4fps)/sLincoln0006.png" id="6_s8i58"]
+[ext_resource type="Texture2D" uid="uid://bvhtb2r70iaqk" path="res://art/dogs/Lincoln (4fps)/sLincoln0007.png" id="7_uywbs"]
+[ext_resource type="Texture2D" uid="uid://g56pb7hb3iu1" path="res://art/dogs/Lincoln (4fps)/sLincoln0008.png" id="8_qivbj"]
+[ext_resource type="Texture2D" uid="uid://fec5ovrlq4wn" path="res://art/dogs/Lincoln (4fps)/sLincoln0009.png" id="9_mnrh8"]
+[ext_resource type="Texture2D" uid="uid://cknmw8jucby3g" path="res://art/dogs/Lincoln (4fps)/sLincolnHappy0001.png" id="10_w2e0d"]
+[ext_resource type="Texture2D" uid="uid://dshpqujgdv5a2" path="res://art/dogs/Lincoln (4fps)/sLincolnHappy0002.png" id="11_t4kxr"]
+[ext_resource type="Texture2D" uid="uid://ba2hkgy6haqiq" path="res://art/dogs/Lincoln (4fps)/sLincolnHappy0003.png" id="12_5sqg5"]
+[ext_resource type="Texture2D" uid="uid://bybpkr364ci5f" path="res://art/dogs/Lincoln (4fps)/sLincolnHappy0004.png" id="13_fxmod"]
+[ext_resource type="Texture2D" uid="uid://bk45bdqm3v1bd" path="res://art/dogs/Lincoln (4fps)/sLincolnHappy0005.png" id="14_m3ot5"]
+[ext_resource type="Texture2D" uid="uid://bs85cehf08knt" path="res://art/dogs/Lincoln (4fps)/sLincolnHappy0006.png" id="15_i6grw"]
+[ext_resource type="Texture2D" uid="uid://cs0o34opuvlpp" path="res://art/dogs/Lincoln (4fps)/sLincolnHappy0007.png" id="16_01cbe"]
+[ext_resource type="Texture2D" uid="uid://bete3egn4c35l" path="res://art/dogs/Lincoln (4fps)/sLincolnHappy0008.png" id="17_6lay2"]
+[ext_resource type="Texture2D" uid="uid://caaobluqc38x3" path="res://art/dogs/Lincoln (4fps)/sLincolnHappy0009.png" id="18_6wnoe"]
+[ext_resource type="Texture2D" uid="uid://bmj24ya0dg2sd" path="res://art/dogs/Lincoln (4fps)/sLincolnHappy0010.png" id="19_cqpm0"]
+[ext_resource type="Texture2D" uid="uid://2xc81wly8tnm" path="res://art/dogs/Lincoln (4fps)/sLincolnHappy0011.png" id="20_1345u"]
+[ext_resource type="Texture2D" uid="uid://cqr0eb726h30n" path="res://art/dogs/Lincoln (4fps)/sLincolnHappy0012.png" id="21_t3dye"]
+[ext_resource type="Texture2D" uid="uid://csyhrshxhdliu" path="res://art/dogs/Lincoln (4fps)/sLincolnHappy0013.png" id="22_awlf5"]
+[ext_resource type="Texture2D" uid="uid://borpukd7hx5i7" path="res://art/dogs/Lincoln (4fps)/sLincolnHappy0014.png" id="23_p06ic"]
+[ext_resource type="Texture2D" uid="uid://hig442iqxh71" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0001.png" id="24_kdu48"]
+[ext_resource type="Texture2D" uid="uid://dvbysmla13a2p" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0002.png" id="25_xgqqy"]
+[ext_resource type="Texture2D" uid="uid://cbqdq6fcgwqmf" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0003.png" id="26_wyn6y"]
+[ext_resource type="Texture2D" uid="uid://d2xo1whxqv7ko" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0004.png" id="27_xiawr"]
+[ext_resource type="Texture2D" uid="uid://rwhdk1gvo5h0" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0005.png" id="28_4g3a4"]
+[ext_resource type="Texture2D" uid="uid://cbihao67lat7s" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0006.png" id="29_kiqmd"]
+[ext_resource type="Texture2D" uid="uid://c3ygcgtcx836i" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0007.png" id="30_vckeu"]
+[ext_resource type="Texture2D" uid="uid://bqmtpfg2lu326" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0008.png" id="31_dso3f"]
+[ext_resource type="Texture2D" uid="uid://dq1spicsfbotc" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0009.png" id="32_ij66a"]
+[ext_resource type="Texture2D" uid="uid://bp2gmhrtc0mi6" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0010.png" id="33_o1p5m"]
+[ext_resource type="Texture2D" uid="uid://bkg8cd0om73wq" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0011.png" id="34_p8q2b"]
+[ext_resource type="Texture2D" uid="uid://1wrsw86hp31g" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0012.png" id="35_5pwe6"]
+[ext_resource type="Texture2D" uid="uid://nqlw55njpx6k" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0013.png" id="36_pvygj"]
+[ext_resource type="Texture2D" uid="uid://nsk6crrbl8qo" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0014.png" id="37_w3s3n"]
+[ext_resource type="Texture2D" uid="uid://cx6ejitiqs2je" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0015.png" id="38_in5jw"]
+[ext_resource type="Texture2D" uid="uid://m2y14if6agga" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0016.png" id="39_w2pf7"]
+[ext_resource type="Texture2D" uid="uid://chb6hn6gtwc0b" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0017.png" id="40_6m7dh"]
+[ext_resource type="Texture2D" uid="uid://ynye6e2r7q2l" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0018.png" id="41_53h08"]
+[ext_resource type="Texture2D" uid="uid://b1obm80h4o7qp" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0019.png" id="42_6cqaw"]
+[ext_resource type="Texture2D" uid="uid://o58v18hk4bre" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0020.png" id="43_ivv6y"]
+[ext_resource type="Texture2D" uid="uid://bs7ok13pxkktu" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0021.png" id="44_gktqy"]
+[ext_resource type="Texture2D" uid="uid://b6wbwblebffkq" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0022.png" id="45_2uwg7"]
+[ext_resource type="Texture2D" uid="uid://bbkgaru3g2eq8" path="res://art/dogs/Lincoln (4fps)/sLincolnMad0023.png" id="46_fd6uy"]
+[ext_resource type="Script" path="res://lincoln.gd" id="47_71y5e"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fyb2x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8hlwk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ddjkk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_48hwq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_puqgw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7y88v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_s8i58")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_uywbs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qivbj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mnrh8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_w2e0d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_t4kxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_5sqg5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_fxmod")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_m3ot5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_i6grw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_01cbe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_6lay2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_6wnoe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_cqpm0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_1345u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_t3dye")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_awlf5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_p06ic")
+}],
+"loop": false,
+"name": &"happy",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_kdu48")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_xgqqy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_wyn6y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_xiawr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_4g3a4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_kiqmd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_vckeu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_dso3f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_ij66a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_o1p5m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_p8q2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_5pwe6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_pvygj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_w3s3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_in5jw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_w2pf7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_6m7dh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_53h08")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_6cqaw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_ivv6y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_gktqy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_2uwg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_fd6uy")
+}],
+"loop": false,
+"name": &"mad",
+"speed": 8.0
+}]
+
+[node name="Lincoln" type="AnimatedSprite2D"]
+position = Vector2(1429, 44)
+sprite_frames = SubResource("SpriteFrames_fyb2x")
+animation = &"mad"
+autoplay = "default"
+centered = false
+script = ExtResource("47_71y5e")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
