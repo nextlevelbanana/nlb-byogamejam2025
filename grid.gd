@@ -19,7 +19,7 @@ func _ready() -> void:
 	SignalBus.connect("swap_selected", _on_swap_selected)
 
 func _process(delta: float) -> void:
-	check_for_game_over()
+	pass
 	
 func _unhandled_key_input(event: InputEvent) -> void:
 	if is_input_locked: 
@@ -146,8 +146,8 @@ func swap():
 
 func animate_swap(pos1, pos2):
 	var tween = get_tree().create_tween().set_parallel(true)
-	tween.tween_property(secondSelected, "position", pos1, 0.5)
-	tween.tween_property(firstSelected, "position", pos2, 0.5)
+	tween.tween_property(secondSelected, "position", pos1, 0.4)
+	tween.tween_property(firstSelected, "position", pos2, 0.4)
 	await tween.finished
 	
 
@@ -168,7 +168,6 @@ func refill_preview_cells():
 		
 	
 #returns an array of lists of coordinates of all the matches on the grid
-#cautiously optimistic this is working as well
 func get_matches():
 	var matches = []
 	#find all horizontal matches
@@ -180,6 +179,9 @@ func get_matches():
 			var candidate = cells[y][x]
 			var next_cell = cells[y][x+1]
 			var third_cell = cells[y][x+2]
+			
+			if candidate.kind == null && next_cell.kind == null && third_cell.kind == null:
+				print("debugg")
 			
 			if (!candidate.isLocked && 
 					!next_cell.isLocked && next_cell.kind == candidate.kind &&
@@ -200,7 +202,7 @@ func get_matches():
 			else: # not a triad, check the next column
 				x = x + 1
 
-	#todo: find all vertical matches
+	#vertical matches
 	for x in Constants.GRID_SIZE:
 		var y = 0
 		var current_match = [ ]
@@ -209,6 +211,8 @@ func get_matches():
 			var candidate = cells[y][x]
 			var next_cell = cells[y+1][x]
 			var third_cell = cells[y+2][x]
+			if candidate.kind == null && next_cell.kind == null && third_cell.kind == null:
+				print("debugg")
 			if (!candidate.isLocked &&
 				!next_cell.isLocked && next_cell.kind == candidate.kind && 
 					!third_cell.isLocked && third_cell.kind == candidate.kind):
@@ -231,7 +235,6 @@ func get_matches():
 				
 
 # returns the column indexes that have new completed hats
-#I feel good about this one
 func get_new_completed_hats():
 	var hat_matches = []
 	for column in Constants.GRID_SIZE:
@@ -285,6 +288,7 @@ func _on_swap_selected():
 	if columns_with_new_hats.size():
 		print("new hat found")
 		lock_hats_in_columns(columns_with_new_hats)
+		check_for_game_over()
 	
 	await get_tree().process_frame
 	
@@ -297,7 +301,7 @@ func _on_swap_selected():
 			for cell_coords in m:
 				await poof (cells[cell_coords.y][cell_coords.x].position)
 				cells[cell_coords.y][cell_coords.x].update_kind(null)
-		refill_empty_cells()
+		await refill_empty_cells()
 		
 	while should_check_again:
 		print("checking again")
@@ -306,6 +310,7 @@ func _on_swap_selected():
 		print("columns with new hats?", columns_with_new_hats.size())
 		if columns_with_new_hats.size():
 			lock_hats_in_columns(columns_with_new_hats)
+			check_for_game_over()
 			
 		matches = get_matches()
 		print("matches found: %s" % matches.size())
@@ -315,8 +320,9 @@ func _on_swap_selected():
 			should_check_again = true
 			for m in matches:
 				for cell_coords in m:
+					await poof (cells[cell_coords.y][cell_coords.x].position)
 					cells[cell_coords.y][cell_coords.x].update_kind(null)
-			refill_empty_cells()
+			await refill_empty_cells()
 	
 	toggle_input_lock(false)
 
@@ -346,17 +352,19 @@ func find_next_lowest_not_empty(empty, column):
 	return -1
 
 
-func drop_prev(row, column):
+func drop_from_preview(target_row, column):
 	var tween = get_tree().create_tween().set_parallel(true)
 	var original_pos = preview_cells[column].position
-	tween.tween_property(preview_cells[column], "position", Vector2(original_pos.x, original_pos.y + Constants.CELL_SIZE), .5)
+	var distance_to_fall = (target_row + 1) * Constants.CELL_SIZE
+	tween.tween_property(preview_cells[column], "position", Vector2(original_pos.x, original_pos.y + distance_to_fall), .4).set_trans(Tween.TRANS_BACK)
 	await tween.finished
 	return original_pos
 	
-func drop_in_grid(row, column):
+func drop_in_grid(row, column, target):
 	var tween = get_tree().create_tween().set_parallel(true)
 	var original_pos = cells[row][column].position
-	tween.tween_property(cells[row][column], "position", Vector2(original_pos.x, original_pos.y + Constants.CELL_SIZE), .5)
+	var distance_to_fall = (target - row) * Constants.CELL_SIZE
+	tween.tween_property(cells[row][column], "position", Vector2(original_pos.x, original_pos.y + distance_to_fall), .4).set_trans(Tween.TRANS_BACK)
 	await tween.finished
 	return original_pos
 
@@ -371,28 +379,28 @@ func refill_empty_cells():
 	for column in Constants.GRID_SIZE:
 		var cur = find_lowest_empty(column)
 		while cur != -1:
-			var fill = find_next_lowest_not_empty(cur, column)
-			if fill == -1:
-				var original_pos = await drop_prev(cur, column)
+			var fillFromRow = find_next_lowest_not_empty(cur, column)
+			if fillFromRow == -1:
+				var original_pos = await drop_from_preview(cur, column)
 				cells[cur][column].update_kind(preview_cells[column].kind)
 				preview_cells[column].position = original_pos
 				preview_cells[column].update_kind(Constants.KINDS.pick_random())
 			else:
-				#var original_pos = await drop_in_grid(fill, column)
-				cells[cur][column].update_kind(cells[fill][column].kind)
-				#cells[fill][column].position = original_pos
-				cells[fill][column].update_kind(null)
+				var original_pos = await drop_in_grid(fillFromRow, column, cur)
+				print(cells[fillFromRow][column].kind)
+				cells[cur][column].update_kind(cells[fillFromRow][column].kind)
+				cells[fillFromRow][column].position = original_pos
+				cells[fillFromRow][column].update_kind(null)
 				await get_tree().process_frame
 			cur = cur - 1
 	
-# this isn't hooked up to anything yet				
 func check_for_game_over():
 	var is_over = true
 	for col in Constants.GRID_SIZE:
 		if !cells[Constants.GRID_SIZE - 1][col].isLocked:
-			is_over = false
+			return false
 	
 	if is_over:
-		SignalBus.game_over.emit()
+		SignalBus.all_hats.emit()
 		
 	
