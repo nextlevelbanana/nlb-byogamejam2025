@@ -28,6 +28,7 @@ func _on_game_started():
 #	$Title.queue_free()
 			
 func _on_game_over():
+	#GameOverScene.score = score
 	add_child(GameOverScene)
 	MainScene.queue_free()
 	
