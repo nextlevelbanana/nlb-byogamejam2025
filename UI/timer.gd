@@ -50,4 +50,4 @@ func _panic_time() -> void:
 	AudioSignalBus.play_fast_pitch.emit()
 
 func _game_over_man() -> void:
-	pass
+	SignalBus.game_over_timer.emit()

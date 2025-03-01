@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmgc4geao5pan"]
+[gd_scene load_steps=3 format=3 uid="uid://c5fg6fasvcv0a"]
 
 [ext_resource type="FontFile" uid="uid://c82ncppq1djt6" path="res://assets/Fonts/Sunflare.ttf" id="1_s41vg"]
 [ext_resource type="Script" path="res://text_fx.gd" id="1_t0ev7"]
