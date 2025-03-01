@@ -1,9 +1,207 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdtwhg5p33xff"]
+[gd_scene load_steps=54 format=3 uid="uid://bdtwhg5p33xff"]
 
 [ext_resource type="Script" path="res://grid.gd" id="1_xvbq3"]
 [ext_resource type="Texture2D" uid="uid://33b4ecder8dr" path="res://cursor.png" id="2_dpelq"]
-[ext_resource type="Texture2D" uid="uid://c8tcpq1i55hgj" path="res://grid.png" id="3_7lvpl"]
+[ext_resource type="PackedScene" uid="uid://bda3w446xf6er" path="res://background.tscn" id="2_hwuuf"]
+[ext_resource type="Texture2D" uid="uid://bkk34ug07jyuw" path="res://art/ui/sGrid.png" id="3_d44yu"]
 [ext_resource type="Texture2D" uid="uid://d0q4hu2krt2cc" path="res://art/cursor-selected.png" id="4_ifdoo"]
+[ext_resource type="Texture2D" uid="uid://dfd33wdwdr0sf" path="res://art/dogs/DogA(4fps)/sDogA0001.png" id="5_rqjb0"]
+[ext_resource type="Texture2D" uid="uid://b8xeh6vl5jhhy" path="res://art/dogs/DogA(4fps)/sDogA0002.png" id="6_b61fj"]
+[ext_resource type="Texture2D" uid="uid://c00w5blqdw7t7" path="res://art/dogs/DogA(4fps)/sDogA0003.png" id="7_w0s6o"]
+[ext_resource type="Texture2D" uid="uid://bw3u5jj4c8t4a" path="res://art/dogs/DogA(4fps)/sDogA0004.png" id="8_b2qpk"]
+[ext_resource type="Texture2D" uid="uid://brbajnxapmcs" path="res://art/dogs/DogA(4fps)/sDogA0005.png" id="9_fjxik"]
+[ext_resource type="Texture2D" uid="uid://meots2udawff" path="res://art/dogs/DogA(4fps)/sDogA0006.png" id="10_lrknr"]
+[ext_resource type="Texture2D" uid="uid://clv6qhqdw1mve" path="res://art/dogs/DogA(4fps)/sDogA0007.png" id="11_bbdcq"]
+[ext_resource type="Texture2D" uid="uid://ch6itdak85imw" path="res://art/dogs/DogA(4fps)/sDogA0008.png" id="12_b7tri"]
+[ext_resource type="Texture2D" uid="uid://qjemxj8ljkbt" path="res://art/dogs/DogA(4fps)/sDogA0009.png" id="13_vvjbr"]
+[ext_resource type="Texture2D" uid="uid://lvtyw30selrb" path="res://art/dogs/DogB(4fps)/sDogB0001.png" id="14_cq0r1"]
+[ext_resource type="Texture2D" uid="uid://bl2s6yu8xrdqj" path="res://art/dogs/DogB(4fps)/sDogB0002.png" id="15_prapv"]
+[ext_resource type="Texture2D" uid="uid://dha8y6vqkxmey" path="res://art/dogs/DogB(4fps)/sDogB0003.png" id="16_xmjlo"]
+[ext_resource type="Texture2D" uid="uid://c3c42cxh1e8se" path="res://art/dogs/DogB(4fps)/sDogB0004.png" id="17_hij3w"]
+[ext_resource type="Texture2D" uid="uid://dp1xto4vbai7f" path="res://art/dogs/DogB(4fps)/sDogB0005.png" id="18_2ap1j"]
+[ext_resource type="Texture2D" uid="uid://djsrgai311l5o" path="res://art/dogs/DogB(4fps)/sDogB0006.png" id="19_kh2j6"]
+[ext_resource type="Texture2D" uid="uid://mxtnewgvkk37" path="res://art/dogs/DogB(4fps)/sDogB0007.png" id="20_2rbry"]
+[ext_resource type="Texture2D" uid="uid://d1rvwe1ie7746" path="res://art/dogs/DogB(4fps)/sDogB0008.png" id="21_4pu8v"]
+[ext_resource type="Texture2D" uid="uid://uf1yjrpxevn6" path="res://art/dogs/DogB(4fps)/sDogB0009.png" id="22_ut0tm"]
+[ext_resource type="Texture2D" uid="uid://bbkl5e5jesld3" path="res://art/dogs/DogC(4fps)/sDogC0001.png" id="23_00u3w"]
+[ext_resource type="Texture2D" uid="uid://v6r7te5qtd2y" path="res://art/dogs/DogC(4fps)/sDogC0002.png" id="24_yt26i"]
+[ext_resource type="Texture2D" uid="uid://bfm5xygpetcv5" path="res://art/dogs/DogC(4fps)/sDogC0003.png" id="25_kh16m"]
+[ext_resource type="Texture2D" uid="uid://ctoi1qvcmjrem" path="res://art/dogs/DogD(4fps)/sDogD0001.png" id="26_unnds"]
+[ext_resource type="Texture2D" uid="uid://c2m0nedwmv1n4" path="res://art/dogs/DogD(4fps)/sDogD0002.png" id="27_cdxnv"]
+[ext_resource type="Texture2D" uid="uid://bvxglm25vn1hr" path="res://art/dogs/DogD(4fps)/sDogD0003.png" id="28_73noj"]
+[ext_resource type="Texture2D" uid="uid://bcxm0ngxgelih" path="res://art/dogs/DogD(4fps)/sDogD0004.png" id="29_l76o7"]
+[ext_resource type="Texture2D" uid="uid://fdmidyst4lub" path="res://art/dogs/DogD(4fps)/sDogD0005.png" id="30_d7va4"]
+[ext_resource type="Texture2D" uid="uid://dtklfnoia8gdc" path="res://art/dogs/DogD(4fps)/sDogD0006.png" id="31_vopdi"]
+[ext_resource type="Texture2D" uid="uid://dh16adonmkv8v" path="res://art/dogs/DogD(4fps)/sDogD0007.png" id="32_gl0xw"]
+[ext_resource type="Texture2D" uid="uid://clhvyiu5rp4p5" path="res://art/dogs/DogD(4fps)/sDogD0008.png" id="33_loom5"]
+[ext_resource type="Texture2D" uid="uid://bu1vwkoseb67m" path="res://art/dogs/DogD(4fps)/sDogD0009.png" id="34_qloc7"]
+[ext_resource type="Texture2D" uid="uid://cafunaj7lvvvp" path="res://art/dogs/DogE(4fps)/sDogE0001.png" id="35_w2khf"]
+[ext_resource type="Texture2D" uid="uid://ooee47khhlci" path="res://art/dogs/DogE(4fps)/sDogE0002.png" id="36_2efg4"]
+[ext_resource type="Texture2D" uid="uid://bf1dpncu8iw43" path="res://art/dogs/DogE(4fps)/sDogE0003.png" id="37_fsktq"]
+[ext_resource type="Texture2D" uid="uid://bhspj0u62n3op" path="res://art/dogs/DogE(4fps)/sDogE0004.png" id="38_nx1x0"]
+[ext_resource type="Texture2D" uid="uid://ifhcr0xn3di0" path="res://art/dogs/DogE(4fps)/sDogE0005.png" id="39_k3xi3"]
+[ext_resource type="Texture2D" uid="uid://isj8t4yqadfy" path="res://art/dogs/DogE(4fps)/sDogE0006.png" id="40_wojnf"]
+[ext_resource type="Texture2D" uid="uid://5prvxwcb1j41" path="res://art/dogs/DogE(4fps)/sDogE0007.png" id="41_attwu"]
+[ext_resource type="Texture2D" uid="uid://b3b2pqpijwuvf" path="res://art/dogs/DogE(4fps)/sDogE0008.png" id="42_aj7tg"]
+[ext_resource type="Texture2D" uid="uid://cm8q46dobhuhn" path="res://art/dogs/DogE(4fps)/sDogE0009.png" id="43_44vau"]
+[ext_resource type="PackedScene" uid="uid://7btbw25mt22o" path="res://lincoln.tscn" id="43_snxwh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xmwd6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_rqjb0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_b61fj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_w0s6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_b2qpk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_fjxik")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lrknr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_bbdcq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_b7tri")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_vvjbr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bhx83"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_cq0r1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_prapv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_xmjlo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_hij3w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_2ap1j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_kh2j6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_2rbry")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_4pu8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_ut0tm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_67xt5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_00u3w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_yt26i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_kh16m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dpq3l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_unnds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_cdxnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_73noj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_l76o7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_d7va4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_vopdi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_gl0xw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_loom5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_qloc7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_88g8n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("35_w2khf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_2efg4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_fsktq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_nx1x0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_k3xi3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_wojnf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_attwu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_aj7tg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_44vau")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uor20"]
 animations = [{
@@ -41,22 +239,63 @@ animations = [{
 [node name="Grid" type="Node2D"]
 script = ExtResource("1_xvbq3")
 
-[node name="Cursor" type="AnimatedSprite2D" parent="."]
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_uor20")
-centered = false
+[node name="Background" parent="." instance=ExtResource("2_hwuuf")]
 
 [node name="Grid" type="Sprite2D" parent="."]
-position = Vector2(300, 300)
-texture = ExtResource("3_7lvpl")
+position = Vector2(534, 160)
+texture = ExtResource("3_d44yu")
+centered = false
+
+[node name="DogA" type="AnimatedSprite2D" parent="."]
+position = Vector2(507, 886)
+sprite_frames = SubResource("SpriteFrames_xmwd6")
+autoplay = "default"
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="DogB" type="AnimatedSprite2D" parent="."]
+position = Vector2(658, 886)
+sprite_frames = SubResource("SpriteFrames_bhx83")
+autoplay = "default"
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="DogC" type="AnimatedSprite2D" parent="."]
+position = Vector2(820, 886)
+sprite_frames = SubResource("SpriteFrames_67xt5")
+autoplay = "default"
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="DogD" type="AnimatedSprite2D" parent="."]
+position = Vector2(975, 886)
+sprite_frames = SubResource("SpriteFrames_dpq3l")
+autoplay = "default"
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="DogE" type="AnimatedSprite2D" parent="."]
+position = Vector2(1118, 886)
+sprite_frames = SubResource("SpriteFrames_88g8n")
+autoplay = "default"
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="Lincoln" parent="." instance=ExtResource("43_snxwh")]
+
+[node name="Cursor" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4.688, 4.688)
+sprite_frames = SubResource("SpriteFrames_uor20")
 centered = false
 
 [node name="SecondSelection" type="AnimatedSprite2D" parent="."]
 visible = false
+scale = Vector2(1.172, 1.172)
 sprite_frames = SubResource("SpriteFrames_8npnm")
 centered = false
 
 [node name="FirstSelection" type="AnimatedSprite2D" parent="."]
 visible = false
+scale = Vector2(1.172, 1.172)
 sprite_frames = SubResource("SpriteFrames_1xrg6")
 centered = false
