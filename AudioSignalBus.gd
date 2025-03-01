@@ -23,3 +23,9 @@ signal play_match_made
 
 # UI - button click
 signal play_button_click
+
+# Give the music track a little pitch drop to indicate sadness
+signal play_sad_pitch
+
+# Time running out!
+signal play_fast_pitch

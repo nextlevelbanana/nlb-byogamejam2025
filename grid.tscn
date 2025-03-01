@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://grid.gd" id="1_xvbq3"]
 [ext_resource type="Texture2D" uid="uid://33b4ecder8dr" path="res://cursor.png" id="2_dpelq"]
-[ext_resource type="PackedScene" uid="uid://bda3w446xf6er" path="res://background.tscn" id="2_hwuuf"]
 [ext_resource type="Texture2D" uid="uid://bkk34ug07jyuw" path="res://art/ui/sGrid.png" id="3_d44yu"]
 [ext_resource type="Texture2D" uid="uid://d0q4hu2krt2cc" path="res://art/cursor-selected.png" id="4_ifdoo"]
 [ext_resource type="Texture2D" uid="uid://dfd33wdwdr0sf" path="res://art/dogs/DogA(4fps)/sDogA0001.png" id="5_rqjb0"]
@@ -45,6 +44,7 @@
 [ext_resource type="Texture2D" uid="uid://b3b2pqpijwuvf" path="res://art/dogs/DogE(4fps)/sDogE0008.png" id="42_aj7tg"]
 [ext_resource type="Texture2D" uid="uid://cm8q46dobhuhn" path="res://art/dogs/DogE(4fps)/sDogE0009.png" id="43_44vau"]
 [ext_resource type="PackedScene" uid="uid://7btbw25mt22o" path="res://lincoln.tscn" id="43_snxwh"]
+[ext_resource type="PackedScene" uid="uid://bfjt0hhea5i1x" path="res://UI/scoreboard.tscn" id="45_jsmd3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xmwd6"]
 animations = [{
@@ -239,8 +239,6 @@ animations = [{
 [node name="Grid" type="Node2D"]
 script = ExtResource("1_xvbq3")
 
-[node name="Background" parent="." instance=ExtResource("2_hwuuf")]
-
 [node name="Grid" type="Sprite2D" parent="."]
 position = Vector2(534, 160)
 texture = ExtResource("3_d44yu")
@@ -299,3 +297,9 @@ visible = false
 scale = Vector2(1.172, 1.172)
 sprite_frames = SubResource("SpriteFrames_1xrg6")
 centered = false
+
+[node name="Scoreboard" parent="." instance=ExtResource("45_jsmd3")]
+offset_left = 3.0
+offset_top = 15.0
+offset_right = 3.0
+offset_bottom = 15.0

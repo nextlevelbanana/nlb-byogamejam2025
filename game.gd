@@ -17,7 +17,6 @@ func _ready() -> void:
 	SignalBus.connect("game_over", _on_game_over)
 	
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -25,8 +24,8 @@ func _process(delta: float) -> void:
 func _on_game_started():
 	score = 0
 	add_child(MainScene)
-	$Label.visible = true
-	$Title.queue_free()
+	#$Label.visible = true
+#	$Title.queue_free()
 			
 func _on_game_over():
 	add_child(GameOverScene)

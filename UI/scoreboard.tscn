@@ -1,0 +1,146 @@
+[gd_scene load_steps=13 format=3 uid="uid://bfjt0hhea5i1x"]
+
+[ext_resource type="Script" path="res://UI/scoreboard.gd" id="1_1awst"]
+[ext_resource type="FontFile" uid="uid://c82ncppq1djt6" path="res://assets/Fonts/Sunflare.ttf" id="1_d4nnk"]
+[ext_resource type="PackedScene" uid="uid://bda3w446xf6er" path="res://background.tscn" id="2_w5fli"]
+[ext_resource type="Texture2D" uid="uid://bg8yrfe3b7wvj" path="res://art/items/Ball(4fps)/sBall0001.png" id="5_uw0ia"]
+[ext_resource type="Texture2D" uid="uid://c6tuvwenhs0dx" path="res://art/items/Bone(4fps)/sBone0001.png" id="6_r22qf"]
+[ext_resource type="Texture2D" uid="uid://urryw1yuboy2" path="res://art/items/Bowl(4fps)/sBowl0001.png" id="7_42i0a"]
+[ext_resource type="Texture2D" uid="uid://6v43yr2dtkoc" path="res://art/items/HatChef(4fps)/sHatChef0001.png" id="8_jhcup"]
+[ext_resource type="PackedScene" uid="uid://dlhb32i5v4251" path="res://UI/timer.tscn" id="9_k8mcm"]
+[ext_resource type="Texture2D" uid="uid://b5u8g5cm54er3" path="res://art/items/HatCowboy(4fps)/sHatCowboy0001.png" id="9_v4ki8"]
+[ext_resource type="Texture2D" uid="uid://lsqva0thvtkt" path="res://art/items/HatParty(4fps)/sHatParty0001.png" id="10_mopxo"]
+[ext_resource type="Texture2D" uid="uid://bov5wf1njsunv" path="res://art/items/HatTopA(4fps)/sHatTopA0001.png" id="11_y27cw"]
+[ext_resource type="Texture2D" uid="uid://cyny71a4lc4xl" path="res://art/items/HatTopC(4fps)/sHatTopC0001.png" id="12_r7hhl"]
+
+[node name="Scoreboard" type="Control" node_paths=PackedStringArray("scoreLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1awst")
+scoreLabel = NodePath("score_text")
+
+[node name="Timer" parent="." instance=ExtResource("9_k8mcm")]
+position = Vector2(4, -250)
+
+[node name="score_label" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 238.0
+offset_right = 235.0
+offset_bottom = 306.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_d4nnk")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[wave]Score:[/wave]"
+
+[node name="score_label2" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 701.0
+offset_right = 415.0
+offset_bottom = 769.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_d4nnk")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[wave]2 pts.[/wave]"
+
+[node name="score_label3" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 798.0
+offset_right = 415.0
+offset_bottom = 866.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_d4nnk")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[wave]2 pts.[/wave]"
+
+[node name="score_label4" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 229.0
+offset_top = 925.0
+offset_right = 489.0
+offset_bottom = 993.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_d4nnk")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[wave]4-8 pts.[/wave]"
+
+[node name="score_text" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 242.0
+offset_right = 501.0
+offset_bottom = 326.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_d4nnk")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[wave][rainbow]9999999[/rainbow][/wave]"
+fit_content = true
+
+[node name="Background" parent="." instance=ExtResource("2_w5fli")]
+position = Vector2(0, 30)
+
+[node name="SBall0001" type="Sprite2D" parent="."]
+position = Vector2(93, 720)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_uw0ia")
+
+[node name="SBone0001" type="Sprite2D" parent="."]
+position = Vector2(127, 718)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_r22qf")
+
+[node name="SBowl0001" type="Sprite2D" parent="."]
+position = Vector2(166, 731)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_42i0a")
+
+[node name="SHatChef0001" type="Sprite2D" parent="."]
+position = Vector2(104, 823)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("8_jhcup")
+
+[node name="SHatCowboy0001" type="Sprite2D" parent="."]
+position = Vector2(151, 820)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("9_v4ki8")
+
+[node name="SHatParty0001" type="Sprite2D" parent="."]
+position = Vector2(179, 823)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("10_mopxo")
+
+[node name="SHatTopA0001" type="Sprite2D" parent="."]
+position = Vector2(135, 976)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("11_y27cw")
+
+[node name="SHatTopC0001" type="Sprite2D" parent="."]
+position = Vector2(135, 890)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("12_r7hhl")
