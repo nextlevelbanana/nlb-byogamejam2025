@@ -52,7 +52,15 @@ func _play_audio_event(event_key):
 	var event = events[event_key]
 	event.set_2d_attributes(self.global_transform)
 #	event.set_parameter_by_name("RPM", 600)
-	event.set_pitch(pitchValue)
+
+	var rng = RandomNumberGenerator.new()
+	var my_random_number = rng.randf_range(0.0, 100.0)
+
+	if( my_random_number <= 10.0 ):
+		event.set_pitch(0.1)
+		
+	if( my_random_number >= 90 ):
+		event.set_pitch(2)
 	
 	# HACK TODO Adjust these volumes in the fmod bank, sheesh.
 	if( currentVolume > 0.1 ):
