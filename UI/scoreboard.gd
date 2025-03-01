@@ -14,6 +14,7 @@ func _ready() -> void:
 	AudioSignalBus.connect("play_match_made", _play_match_made)
 	SignalBus.connect("top_hat_made", _play_hat_complete)
 	SignalBus.connect("bad_hat_made", play_judgy_abe)
+	SignalBus.connect("game_over_timer", _on_game_time_timeout)
 
 	# register for scoring events
 
@@ -60,3 +61,6 @@ func _play_hat_complete() -> void:
 
 	AudioSignalBus.play_hat_complete.emit()
 	_handle_scoring_event(8)
+
+func _on_game_time_timeout():
+	SignalBus.game_over.emit()
