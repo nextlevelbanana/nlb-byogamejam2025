@@ -11,6 +11,8 @@ var hats_complete = 0
 
 var is_input_locked = false
 
+var PoofScene = preload("res://poof.tscn")
+
 func _ready() -> void:
 	$Cursor.position = Constants.GRID_ORIGIN
 	initialize_grid()
@@ -234,7 +236,6 @@ func get_new_completed_hats():
 	var hat_matches = []
 	for column in Constants.GRID_SIZE:
 		var current_cell = cells[Constants.GRID_SIZE - 1][column]
-		print(current_cell.isLocked, current_cell.isHat)
 		if !current_cell.isLocked && current_cell.isHat:
 			if current_cell.isTopHat:
 				if get_completed_top_hat(column).size():
@@ -283,7 +284,6 @@ func _on_swap_selected():
 	var columns_with_new_hats = get_new_completed_hats()
 	if columns_with_new_hats.size():
 		print("new hat found")
-		should_check_again = true
 		lock_hats_in_columns(columns_with_new_hats)
 	
 	await get_tree().process_frame
@@ -295,6 +295,7 @@ func _on_swap_selected():
 		should_check_again = true
 		for m in matches:
 			for cell_coords in m:
+				await poof (cells[cell_coords.y][cell_coords.x].position)
 				cells[cell_coords.y][cell_coords.x].update_kind(null)
 		refill_empty_cells()
 		
@@ -307,6 +308,7 @@ func _on_swap_selected():
 			lock_hats_in_columns(columns_with_new_hats)
 			
 		matches = get_matches()
+		print("matches found: %s" % matches.size())
 		if !matches.size():
 			should_check_again = false
 		else:
@@ -325,7 +327,9 @@ func lock_hats_in_columns(col):
 			var all_top_hat_pieces = get_completed_top_hat(h)
 			for piece in all_top_hat_pieces:
 				cells[piece.y][piece.x].update_lock(true)
+			SignalBus.top_hat_made.emit()
 		else:
+			SignalBus.bad_hat_made.emit()
 			cell.update_lock(true)
 
 func find_lowest_empty(column):
@@ -348,8 +352,22 @@ func drop_prev(row, column):
 	tween.tween_property(preview_cells[column], "position", Vector2(original_pos.x, original_pos.y + Constants.CELL_SIZE), .5)
 	await tween.finished
 	return original_pos
+	
+func drop_in_grid(row, column):
+	var tween = get_tree().create_tween().set_parallel(true)
+	var original_pos = cells[row][column].position
+	tween.tween_property(cells[row][column], "position", Vector2(original_pos.x, original_pos.y + Constants.CELL_SIZE), .5)
+	await tween.finished
+	return original_pos
+
+func poof (pos): 
+	print(pos)
+	var new_poof = PoofScene.instantiate()
+	new_poof.position = pos
+	add_child(new_poof)
 
 func refill_empty_cells():
+	print("refilling empty cells")
 	for column in Constants.GRID_SIZE:
 		var cur = find_lowest_empty(column)
 		while cur != -1:
@@ -360,7 +378,9 @@ func refill_empty_cells():
 				preview_cells[column].position = original_pos
 				preview_cells[column].update_kind(Constants.KINDS.pick_random())
 			else:
+				#var original_pos = await drop_in_grid(fill, column)
 				cells[cur][column].update_kind(cells[fill][column].kind)
+				#cells[fill][column].position = original_pos
 				cells[fill][column].update_kind(null)
 				await get_tree().process_frame
 			cur = cur - 1

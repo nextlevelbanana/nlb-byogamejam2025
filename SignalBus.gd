@@ -10,3 +10,7 @@ signal game_started
 signal swap_selected
 
 signal game_over
+
+signal top_hat_made
+
+signal bad_hat_made

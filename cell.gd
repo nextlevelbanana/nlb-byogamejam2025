@@ -34,4 +34,4 @@ func set_pos(row, column):
 func update_lock(newState):
 	isLocked = newState
 	if isLocked:
-		$Symbol.modulate = "#3097b3"
+		$Symbol.animation = "%s-locked" % kind
