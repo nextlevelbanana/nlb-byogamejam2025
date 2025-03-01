@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cbhi8a5c8ngph"]
 
-[ext_resource type="Script" path="res://audio_event_emitter.gd" id="1_0meh8"]
+[ext_resource type="Script" path="res://Audio/audio_event_emitter.gd" id="1_0meh8"]
 
 [node name="AudioEventEmitter" type="Node2D"]
 script = ExtResource("1_0meh8")

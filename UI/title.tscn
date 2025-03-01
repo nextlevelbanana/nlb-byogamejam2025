@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://buyopmqwjsgu5"]
+[gd_scene load_steps=5 format=3 uid="uid://buyopmqwjsgu5"]
 
-[ext_resource type="Script" path="res://title.gd" id="1_ydx3l"]
+[ext_resource type="Script" path="res://UI/title.gd" id="1_ydx3l"]
+[ext_resource type="PackedScene" uid="uid://bda3w446xf6er" path="res://background.tscn" id="2_avq7q"]
+[ext_resource type="PackedScene" uid="uid://bgm5ihlp2c5vb" path="res://Audio/audio_system.tscn" id="2_lxlil"]
 [ext_resource type="FontFile" uid="uid://c82ncppq1djt6" path="res://assets/Fonts/Sunflare.ttf" id="3_52xlp"]
 
 [node name="Title" type="Node2D" node_paths=PackedStringArray("title", "menu")]
 script = ExtResource("1_ydx3l")
 title = NodePath("RichTextLabel")
 menu = NodePath("RichTextLabel2")
+
+[node name="AudioSystem" parent="." instance=ExtResource("2_lxlil")]
+position = Vector2(1499, 480)
+
+[node name="Background" parent="." instance=ExtResource("2_avq7q")]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 247.0

@@ -27,6 +27,10 @@ func _ready() -> void:
 	
 	AudioSignalBus.connect("play_sad_pitch", _play_sad_pitch)
 	AudioSignalBus.connect("play_fast_pitch", _play_fast_pitch)	
+
+	SignalBus.connect("swap_selected", _play_hat_drop)
+	SignalBus.connect("top_hat_made", _play_hat_complete)
+	SignalBus.connect("bad_hat_made", play_judgy_abe)
 	
 	bgMusic = FmodServer.create_event_instance("event:/Music/BackgroundMusic")
 	bgMusic.volume = 0.5
@@ -64,6 +68,7 @@ func _play_hat_complete():
 
 func play_judgy_abe():
 	_play_audio_event("judgy_abe")
+	_play_sad_pitch()
 
 func _play_match_made():
 	_play_audio_event("match_made")

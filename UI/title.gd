@@ -18,8 +18,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		if event.keycode == KEY_ESCAPE:
 			get_tree().quit()
 		else:
-			AudioSignalBus.play_button_click.emit()
-			_bounce_titles()
+			if( !is_launching_game ):
+				is_launching_game = true
+				AudioSignalBus.play_button_click.emit()
+				_bounce_titles()
 
 func _bounce_titles() :
 	var tween = create_tween()

@@ -2,7 +2,7 @@ extends Node2D
 
 @export var label: RichTextLabel
 
-var timer : float = 2;
+var timer : float = 4;
 
 func _process(delta: float) -> void:
 	timer -= delta
