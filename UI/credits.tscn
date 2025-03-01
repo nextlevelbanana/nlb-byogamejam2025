@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2ng5bf4n872m"]
+
+[ext_resource type="Script" path="res://UI/credits.gd" id="1_hobf5"]
+[ext_resource type="FontFile" uid="uid://c82ncppq1djt6" path="res://assets/Fonts/Sunflare.ttf" id="1_xlkhd"]
+[ext_resource type="Texture2D" uid="uid://5o3xardc4c0w" path="res://art/ui/icon_color.png" id="2_53pwe"]
+[ext_resource type="Texture2D" uid="uid://dmjv6pabdltd2" path="res://art/ui/FMOD Logo White - Black Background.png" id="3_fykdq"]
+
+[node name="Credits" type="Node2D" node_paths=PackedStringArray("title", "credits")]
+script = ExtResource("1_hobf5")
+title = NodePath("RichTextLabel")
+credits = NodePath("RichTextLabel3")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 247.0
+offset_top = -393.0
+offset_right = 1666.0
+offset_bottom = -37.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/normal_font = ExtResource("1_xlkhd")
+theme_override_font_sizes/normal_font_size = 164
+bbcode_enabled = true
+text = "[center][wave]HATS & DOGS
+Credits[/wave][/center]"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+offset_left = 68.0
+offset_top = 1106.0
+offset_right = 1851.0
+offset_bottom = 1756.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/normal_font = ExtResource("1_xlkhd")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center][wave]
+nextlevelbanana: Code
+Holly Fowler: Art
+Evan Gibbs: Art & Animation
+Scott Anderson: Code, Audio, UI
+[font_size=22]
+This game uses the Sunflare Font (Personal License)
+(https://justtheskills.com/product/vintage-font-sunflare/)
+
+Music, used under CC-BY 3.0 License, by 'Joe Reynolds - Professorlamp' 
+(https://opengameart.org/content/ska-track)
+
+User Interface sounds, under CC0 License, by Kenney 
+(www.kenney.nl)
+[/font_size]
+[/wave][/center]"
+
+[node name="IconColor" type="Sprite2D" parent="RichTextLabel3"]
+position = Vector2(809.2, 527.2)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_53pwe")
+
+[node name="FmodLogoWhite-BlackBackground" type="Sprite2D" parent="RichTextLabel3"]
+position = Vector2(954.2, 533.2)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_fykdq")
+
+[node name="Button" type="Button" parent="RichTextLabel3"]
+layout_mode = 0
+offset_left = 1567.0
+offset_top = 547.0
+offset_right = 1794.0
+offset_bottom = 617.0
+focus_mode = 0
+theme_override_colors/font_focus_color = Color(0.854902, 0.733333, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = ExtResource("1_xlkhd")
+theme_override_font_sizes/font_size = 64
+text = "Back"
+flat = true
+
+[connection signal="pressed" from="RichTextLabel3/Button" to="." method="_on_back_button_pressed"]

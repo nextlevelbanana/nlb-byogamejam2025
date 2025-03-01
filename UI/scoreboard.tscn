@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bfjt0hhea5i1x"]
+[gd_scene load_steps=12 format=3 uid="uid://bfjt0hhea5i1x"]
 
 [ext_resource type="Script" path="res://UI/scoreboard.gd" id="1_1awst"]
 [ext_resource type="FontFile" uid="uid://c82ncppq1djt6" path="res://assets/Fonts/Sunflare.ttf" id="1_d4nnk"]
-[ext_resource type="PackedScene" uid="uid://bda3w446xf6er" path="res://background.tscn" id="2_w5fli"]
 [ext_resource type="Texture2D" uid="uid://bg8yrfe3b7wvj" path="res://art/items/Ball(4fps)/sBall0001.png" id="5_uw0ia"]
 [ext_resource type="Texture2D" uid="uid://c6tuvwenhs0dx" path="res://art/items/Bone(4fps)/sBone0001.png" id="6_r22qf"]
 [ext_resource type="Texture2D" uid="uid://urryw1yuboy2" path="res://art/items/Bowl(4fps)/sBowl0001.png" id="7_42i0a"]
@@ -101,9 +100,6 @@ theme_override_font_sizes/normal_font_size = 96
 bbcode_enabled = true
 text = "[wave][rainbow]999[/rainbow][/wave]"
 fit_content = true
-
-[node name="Background" parent="." instance=ExtResource("2_w5fli")]
-position = Vector2(0, 30)
 
 [node name="SBall0001" type="Sprite2D" parent="."]
 position = Vector2(140, 447)

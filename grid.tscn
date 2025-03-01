@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://bdtwhg5p33xff"]
+[gd_scene load_steps=53 format=3 uid="uid://bdtwhg5p33xff"]
 
 [ext_resource type="Script" path="res://grid.gd" id="1_xvbq3"]
 [ext_resource type="Texture2D" uid="uid://33b4ecder8dr" path="res://cursor.png" id="2_dpelq"]
@@ -44,7 +44,6 @@
 [ext_resource type="Texture2D" uid="uid://b3b2pqpijwuvf" path="res://art/dogs/DogE(4fps)/sDogE0008.png" id="42_aj7tg"]
 [ext_resource type="Texture2D" uid="uid://cm8q46dobhuhn" path="res://art/dogs/DogE(4fps)/sDogE0009.png" id="43_44vau"]
 [ext_resource type="PackedScene" uid="uid://7btbw25mt22o" path="res://lincoln.tscn" id="43_snxwh"]
-[ext_resource type="PackedScene" uid="uid://bfjt0hhea5i1x" path="res://UI/scoreboard.tscn" id="45_jsmd3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xmwd6"]
 animations = [{
@@ -297,9 +296,3 @@ visible = false
 scale = Vector2(1.172, 1.172)
 sprite_frames = SubResource("SpriteFrames_1xrg6")
 centered = false
-
-[node name="Scoreboard" parent="." instance=ExtResource("45_jsmd3")]
-offset_left = 3.0
-offset_top = 15.0
-offset_right = 3.0
-offset_bottom = 15.0

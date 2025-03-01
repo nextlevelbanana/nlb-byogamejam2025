@@ -35,6 +35,8 @@ func _ready() -> void:
 	SignalBus.connect("top_hat_made", _play_hat_complete)
 	SignalBus.connect("bad_hat_made", play_judgy_abe)
 	
+	SignalBus.connect("game_over", _on_game_over)
+	
 	bgMusic = FmodServer.create_event_instance("event:/Music/BackgroundMusic")
 	bgMusic.volume = currentVolume
 	bgMusic.start()
@@ -126,3 +128,7 @@ func _on_ska_toggled(toggled_on: bool) -> void:
 
 func _on_bloops_toggled(toggled_on: bool) -> void:
 	playBloops = toggled_on
+
+func _on_game_over() -> void:
+	currentPitch = 1.0
+	bgMusic.pitch = currentPitch

@@ -1,16 +1,81 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxrlutqqtu5os"]
+[gd_scene load_steps=4 format=3 uid="uid://cxrlutqqtu5os"]
 
 [ext_resource type="Script" path="res://game_over.gd" id="1_38ppy"]
+[ext_resource type="FontFile" uid="uid://c82ncppq1djt6" path="res://assets/Fonts/Sunflare.ttf" id="2_yvjfk"]
+[ext_resource type="PackedScene" uid="uid://7btbw25mt22o" path="res://lincoln.tscn" id="3_4laj7"]
 
 [node name="GameOver" type="Node2D"]
 script = ExtResource("1_38ppy")
 
-[node name="FinalScore" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_top = 152.0
+offset_right = 1922.0
+offset_bottom = 454.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_outline_size = 12
+theme_override_fonts/normal_font = ExtResource("2_yvjfk")
+theme_override_font_sizes/normal_font_size = 228
+bbcode_enabled = true
+text = "[center][shake]Game Over![/shake]
+[/center]"
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_font_sizes/font_size = 96
-text = "Game over!"
+[node name="FinalScore" type="RichTextLabel" parent="."]
+offset_left = 202.0
+offset_top = 388.0
+offset_right = 1688.0
+offset_bottom = 604.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_yvjfk")
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "[center][wave]You scored [rainbow]999[/rainbow] points![/wave]
+[/center]"
+
+[node name="AbeSays" type="RichTextLabel" parent="."]
+offset_left = 540.0
+offset_top = 636.0
+offset_right = 1474.0
+offset_bottom = 872.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_yvjfk")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center][wave]\"That is a fine collection of hats!\"[/wave]
+[/center]"
+
+[node name="Lincoln" parent="." instance=ExtResource("3_4laj7")]
+position = Vector2(1429, 375)
+
+[node name="MenuMenuButton" type="Button" parent="."]
+offset_left = 520.0
+offset_top = 878.0
+offset_right = 1322.0
+offset_bottom = 980.0
+theme_override_colors/font_hover_color = Color(0.917647, 0.807843, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.901961, 0.85098, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = ExtResource("2_yvjfk")
+theme_override_font_sizes/font_size = 48
+text = "Back to Main Menu"
+flat = true
+
+[connection signal="pressed" from="MenuMenuButton" to="." method="_on_menu_menu_button_pressed"]

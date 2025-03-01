@@ -5,7 +5,7 @@ extends Control
 var TextFx = preload("res://text_fx.tscn")
 
 const WINNING_SCORE : int = 87
-var score : int = 0
+@export var score : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,6 +28,9 @@ func _set_score_text() -> void:
 
 func _handle_scoring_event(points:int) -> void:
 	score += points
+	
+	SignalBus.on_score_changed.emit(points)
+	
 	_set_score_text()
 	
 	if( score > WINNING_SCORE ):
@@ -35,9 +38,10 @@ func _handle_scoring_event(points:int) -> void:
 		pass	
 	
 func _play_match_made() -> void:
-	var textFx = TextFx.instantiate()
-	textFx.set_text("Woof!", 0)
-	add_child(textFx)
+	# Taking this out for now.  Maybe fun later if needed?
+	#var textFx = TextFx.instantiate()
+	#textFx.set_text("Woof!", 0)
+	#add_child(textFx)
 	
 	#AudioSignalBus.play_match_made.emit()
 	_handle_scoring_event(2)
@@ -45,7 +49,7 @@ func _play_match_made() -> void:
 func play_judgy_abe() -> void:
 	var textFx = TextFx.instantiate()
 	textFx.set_text("I DISAPPROVE OF THIS HAT.", 1)
-	textFx.position = Vector2(1330, 630)
+	textFx.position = Vector2(1360, 700)
 	add_child(textFx)
 
 	AudioSignalBus.play_sad_pitch.emit()
@@ -55,7 +59,7 @@ func play_judgy_abe() -> void:
 
 func _play_hat_complete() -> void:
 	var textFx = TextFx.instantiate()
-	textFx.position = Vector2(1330, 630)
+	textFx.position = Vector2(1360, 700)
 	textFx.set_text("Four score and Seven points for that hat!", 2)
 	add_child(textFx)
 

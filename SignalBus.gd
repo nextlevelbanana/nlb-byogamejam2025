@@ -18,3 +18,9 @@ signal bad_hat_made
 signal game_over_timer
 
 signal all_hats
+
+signal close_credits
+
+signal on_score_changed
+
+signal on_restart_game
