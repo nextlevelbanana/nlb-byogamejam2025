@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://buyopmqwjsgu5"]
+[gd_scene load_steps=7 format=3 uid="uid://buyopmqwjsgu5"]
 
 [ext_resource type="Script" path="res://UI/title.gd" id="1_ydx3l"]
 [ext_resource type="PackedScene" uid="uid://bda3w446xf6er" path="res://background.tscn" id="2_avq7q"]
 [ext_resource type="PackedScene" uid="uid://bgm5ihlp2c5vb" path="res://Audio/audio_system.tscn" id="2_lxlil"]
 [ext_resource type="FontFile" uid="uid://c82ncppq1djt6" path="res://assets/Fonts/Sunflare.ttf" id="3_52xlp"]
+[ext_resource type="Texture2D" uid="uid://5o3xardc4c0w" path="res://art/ui/icon_color.png" id="5_0p647"]
+[ext_resource type="Texture2D" uid="uid://dmjv6pabdltd2" path="res://art/ui/FMOD Logo White - Black Background.png" id="6_kvg2g"]
 
 [node name="Title" type="Node2D" node_paths=PackedStringArray("title", "menu")]
 script = ExtResource("1_ydx3l")
@@ -32,10 +34,11 @@ bbcode_enabled = true
 text = "[center][wave]HATS & DOGS[/wave][/center]"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
-offset_left = 255.0
-offset_top = 829.0
-offset_right = 1642.0
-offset_bottom = 928.0
+offset_left = 10.0
+offset_top = 778.0
+offset_right = 1916.0
+offset_bottom = 1079.0
+mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
@@ -45,6 +48,42 @@ theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/normal_font = ExtResource("3_52xlp")
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
-text = "[center][wave]Press any key to Start!	[/wave][/center]"
+text = "[center]
+[wave]
+Press any key to Start!
+[/wave]
+[/center]"
 fit_content = true
 scroll_active = false
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="RichTextLabel2"]
+offset_left = 1360.0
+offset_top = 30.0
+offset_right = 1945.0
+offset_bottom = 207.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/normal_font = ExtResource("3_52xlp")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center][wave]
+nextlevelbanana: Code
+Holly Fowler: Art
+Evan Gibbs: Art & Animation
+Scott Anderson: Code, Audio, UI
+[/wave][/center]"
+
+[node name="IconColor" type="Sprite2D" parent="RichTextLabel2"]
+position = Vector2(1589.2, 242.2)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_0p647")
+
+[node name="FmodLogoWhite-BlackBackground" type="Sprite2D" parent="RichTextLabel2"]
+position = Vector2(1734.2, 248.2)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("6_kvg2g")
