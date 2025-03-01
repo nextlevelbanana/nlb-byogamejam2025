@@ -16,3 +16,5 @@ signal top_hat_made
 signal bad_hat_made
 
 signal game_over_timer
+
+signal all_hats

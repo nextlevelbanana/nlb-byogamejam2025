@@ -401,6 +401,6 @@ func check_for_game_over():
 			return false
 	
 	if is_over:
-		SignalBus.game_over.emit()
+		SignalBus.all_hats.emit()
 		
 	
