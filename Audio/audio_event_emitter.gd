@@ -6,6 +6,9 @@ var bgMusic: FmodEvent
 var pitchValue: float = 1.0
 var currentPitch: float = 1.0
 
+var playBloops: bool = true
+var currentVolume: float = 0.5
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	events["play_cursor_movement"] = FmodServer.create_event_instance("event:/Controls/Cursor Movement")
@@ -33,7 +36,7 @@ func _ready() -> void:
 	SignalBus.connect("bad_hat_made", play_judgy_abe)
 	
 	bgMusic = FmodServer.create_event_instance("event:/Music/BackgroundMusic")
-	bgMusic.volume = 0.5
+	bgMusic.volume = currentVolume
 	bgMusic.start()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,12 +44,22 @@ func _process(delta: float) -> void:
 	pass
 
 func _play_audio_event(event_key):
-	print("audio_event_emitter::_play_audio_event::" + event_key)
+	
+	if( !playBloops ):
+		return
+	
+	print("audio_event_emitter::_play_audio_event::" + event_key)	
 	var event = events[event_key]
 	event.set_2d_attributes(self.global_transform)
 #	event.set_parameter_by_name("RPM", 600)
 	event.set_pitch(pitchValue)
-	event.volume = 1.2
+	
+	# HACK TODO Adjust these volumes in the fmod bank, sheesh.
+	if( currentVolume > 0.1 ):
+		event.volume = currentVolume + (0.7)
+	else:
+		event.volume = 0.0
+		
 	event.start()
 
 func _play_cursor_movement():
@@ -77,10 +90,11 @@ func _play_button_click():
 	_play_audio_event("button_click")
 
 func _on_h_slider_value_changed(value: float) -> void:
-	pitchValue = value;
-	bgMusic.set_pitch(value)
-	
-	
+	#pitchValue = value;
+	#bgMusic.set_pitch(value)
+	currentVolume = value
+	bgMusic.volume = currentVolume
+		
 func _play_sad_pitch():	
 	var tween = create_tween()
 	tween.tween_property(bgMusic, "pitch", 0.1, 1.5)
@@ -96,3 +110,11 @@ func _play_normal_pitch():
 	var tween = create_tween()
 	tween.tween_property(bgMusic, "pitch", 1.0, 1)
 	
+func _on_ska_toggled(toggled_on: bool) -> void:
+	if( toggled_on ):
+		bgMusic.start()
+	else:
+		bgMusic.stop(0)
+
+func _on_bloops_toggled(toggled_on: bool) -> void:
+	playBloops = toggled_on

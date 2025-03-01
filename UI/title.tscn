@@ -11,7 +11,7 @@ title = NodePath("RichTextLabel")
 menu = NodePath("RichTextLabel2")
 
 [node name="AudioSystem" parent="." instance=ExtResource("2_lxlil")]
-position = Vector2(1499, 480)
+position = Vector2(97, 882)
 
 [node name="Background" parent="." instance=ExtResource("2_avq7q")]
 

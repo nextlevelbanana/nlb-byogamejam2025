@@ -28,10 +28,10 @@ position = Vector2(4, -250)
 
 [node name="score_label" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 51.0
-offset_top = 238.0
-offset_right = 235.0
-offset_bottom = 306.0
+offset_left = 93.0
+offset_top = 276.0
+offset_right = 277.0
+offset_bottom = 344.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_offset_x = 2
@@ -43,10 +43,10 @@ text = "[wave]Score:[/wave]"
 
 [node name="score_label2" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 231.0
-offset_top = 701.0
-offset_right = 415.0
-offset_bottom = 769.0
+offset_left = 278.0
+offset_top = 428.0
+offset_right = 462.0
+offset_bottom = 496.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_offset_x = 2
@@ -58,10 +58,10 @@ text = "[wave]2 pts.[/wave]"
 
 [node name="score_label3" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 231.0
-offset_top = 798.0
-offset_right = 415.0
-offset_bottom = 866.0
+offset_left = 278.0
+offset_top = 525.0
+offset_right = 462.0
+offset_bottom = 593.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_offset_x = 2
@@ -73,10 +73,10 @@ text = "[wave]2 pts.[/wave]"
 
 [node name="score_label4" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 229.0
-offset_top = 925.0
-offset_right = 489.0
-offset_bottom = 993.0
+offset_left = 276.0
+offset_top = 626.0
+offset_right = 536.0
+offset_bottom = 694.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_offset_x = 2
@@ -88,59 +88,59 @@ text = "[wave]4-8 pts.[/wave]"
 
 [node name="score_text" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 244.0
-offset_top = 242.0
-offset_right = 501.0
-offset_bottom = 326.0
+offset_left = 286.0
+offset_top = 265.0
+offset_right = 511.0
+offset_bottom = 359.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_outline_size = 2
 theme_override_fonts/normal_font = ExtResource("1_d4nnk")
-theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/normal_font_size = 96
 bbcode_enabled = true
-text = "[wave][rainbow]9999999[/rainbow][/wave]"
+text = "[wave][rainbow]999[/rainbow][/wave]"
 fit_content = true
 
 [node name="Background" parent="." instance=ExtResource("2_w5fli")]
 position = Vector2(0, 30)
 
 [node name="SBall0001" type="Sprite2D" parent="."]
-position = Vector2(93, 720)
+position = Vector2(140, 447)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_uw0ia")
 
 [node name="SBone0001" type="Sprite2D" parent="."]
-position = Vector2(127, 718)
+position = Vector2(174, 445)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("6_r22qf")
 
 [node name="SBowl0001" type="Sprite2D" parent="."]
-position = Vector2(166, 731)
+position = Vector2(213, 458)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("7_42i0a")
 
 [node name="SHatChef0001" type="Sprite2D" parent="."]
-position = Vector2(104, 823)
+position = Vector2(151, 550)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("8_jhcup")
 
 [node name="SHatCowboy0001" type="Sprite2D" parent="."]
-position = Vector2(151, 820)
+position = Vector2(198, 547)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("9_v4ki8")
 
 [node name="SHatParty0001" type="Sprite2D" parent="."]
-position = Vector2(179, 823)
+position = Vector2(226, 550)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("10_mopxo")
 
 [node name="SHatTopA0001" type="Sprite2D" parent="."]
-position = Vector2(135, 976)
+position = Vector2(182, 703)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("11_y27cw")
 
 [node name="SHatTopC0001" type="Sprite2D" parent="."]
-position = Vector2(135, 890)
+position = Vector2(182, 617)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("12_r7hhl")
