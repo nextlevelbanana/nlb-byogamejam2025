@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://blcv718trbqql"
+path="res://.godot/imported/mix a week week 2 ska.mp3-ddcdc6680867335980ecdd8792471e76.mp3str"
+
+[deps]
+
+source_file="res://assets/Banks/byogamejam/Assets/mix a week week 2 ska.mp3"
+dest_files=["res://.godot/imported/mix a week week 2 ska.mp3-ddcdc6680867335980ecdd8792471e76.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

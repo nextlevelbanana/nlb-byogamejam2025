@@ -1,0 +1,190 @@
+[gd_scene load_steps=10 format=3 uid="uid://bfjt0hhea5i1x"]
+
+[ext_resource type="Script" path="res://UI/scoreboard.gd" id="1_1awst"]
+[ext_resource type="FontFile" uid="uid://c82ncppq1djt6" path="res://assets/Fonts/Sunflare.ttf" id="1_d4nnk"]
+[ext_resource type="PackedScene" uid="uid://bgm5ihlp2c5vb" path="res://audio_system.tscn" id="1_rxpul"]
+[ext_resource type="PackedScene" uid="uid://bda3w446xf6er" path="res://background.tscn" id="2_w5fli"]
+[ext_resource type="Texture2D" uid="uid://ld11acivc3a4" path="res://art/cherry.png" id="3_v8oq6"]
+[ext_resource type="Texture2D" uid="uid://basglh33uuxid" path="res://art/ballcap.png" id="4_blwhw"]
+[ext_resource type="Texture2D" uid="uid://ba17clv5sg0x0" path="res://art/hatBottom.png" id="5_oijqf"]
+[ext_resource type="Texture2D" uid="uid://dymb4x17y1lgr" path="res://art/hatTop.png" id="6_82glv"]
+[ext_resource type="PackedScene" uid="uid://dlhb32i5v4251" path="res://timer.tscn" id="9_k8mcm"]
+
+[node name="Scoreboard" type="Control" node_paths=PackedStringArray("scoreLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1awst")
+scoreLabel = NodePath("score_text")
+
+[node name="AudioSystem" parent="." instance=ExtResource("1_rxpul")]
+position = Vector2(1499, 480)
+
+[node name="score_label" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 106.0
+offset_right = 258.0
+offset_bottom = 174.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_d4nnk")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[wave]Score:[/wave]"
+
+[node name="score_label2" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 344.0
+offset_right = 426.0
+offset_bottom = 412.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_d4nnk")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[wave]2 pts.[/wave]"
+
+[node name="score_label3" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 241.0
+offset_top = 470.0
+offset_right = 425.0
+offset_bottom = 538.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_d4nnk")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[wave]2 pts.[/wave]"
+
+[node name="score_label4" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 660.0
+offset_right = 500.0
+offset_bottom = 728.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_d4nnk")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[wave]4-8 pts.[/wave]"
+
+[node name="score_text" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 267.0
+offset_top = 110.0
+offset_right = 524.0
+offset_bottom = 194.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_d4nnk")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[wave][rainbow]9999999[/rainbow][/wave]"
+fit_content = true
+
+[node name="score_text3" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 591.0
+offset_top = 760.0
+offset_right = 907.0
+offset_bottom = 1034.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_d4nnk")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "
+[center][tornado]Who's a good dog?[/tornado][/center]"
+fit_content = true
+
+[node name="score_text4" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 1083.0
+offset_top = 795.0
+offset_right = 1399.0
+offset_bottom = 983.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_d4nnk")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "
+[center][tornado]COOL HAT![/tornado][/center]"
+fit_content = true
+
+[node name="Background" parent="." instance=ExtResource("2_w5fli")]
+position = Vector2(0, 30)
+
+[node name="Cherry" type="Sprite2D" parent="."]
+position = Vector2(146, 372)
+texture = ExtResource("3_v8oq6")
+
+[node name="Ballcap" type="Sprite2D" parent="."]
+position = Vector2(155, 495)
+texture = ExtResource("4_blwhw")
+
+[node name="HatBottom" type="Sprite2D" parent="."]
+position = Vector2(150, 759)
+texture = ExtResource("5_oijqf")
+
+[node name="HatTop" type="Sprite2D" parent="."]
+position = Vector2(148, 632)
+texture = ExtResource("6_82glv")
+
+[node name="object_match_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 447.0
+offset_right = 1021.0
+offset_bottom = 508.0
+theme_override_fonts/font = ExtResource("1_d4nnk")
+theme_override_font_sizes/font_size = 32
+text = "Fire Object Match Event"
+
+[node name="small_hat_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 527.0
+offset_right = 1021.0
+offset_bottom = 588.0
+theme_override_fonts/font = ExtResource("1_d4nnk")
+theme_override_font_sizes/font_size = 32
+text = "Fire Small Hat Event"
+
+[node name="top_hat_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 649.0
+offset_top = 607.0
+offset_right = 1020.0
+offset_bottom = 668.0
+theme_override_fonts/font = ExtResource("1_d4nnk")
+theme_override_font_sizes/font_size = 32
+text = "Fire Top Hat Event"
+
+[node name="Timer" parent="." instance=ExtResource("9_k8mcm")]
+position = Vector2(1, 4)
+
+[connection signal="pressed" from="object_match_button" to="." method="_on_object_match_button_pressed"]
+[connection signal="pressed" from="small_hat_button" to="." method="_on_small_hat_button_pressed"]
+[connection signal="pressed" from="top_hat_button" to="." method="_on_top_hat_button_pressed"]
