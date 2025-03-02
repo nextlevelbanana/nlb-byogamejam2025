@@ -29,7 +29,7 @@ func _play_basic_lincoln() -> void:
 	
 func _play_stoked_lincoln() -> void:
 	$AbeSays.text = "[center][wave][rainbow]\"I declare this to be a fine collection of hats!\"[/rainbow][/wave][/center]"
-	$Lincoln._on_top_hat_made()
+	$Lincoln._on_top_hat_made(1)
 	pass
 
 

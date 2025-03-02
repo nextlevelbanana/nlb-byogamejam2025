@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bheiatdxe4yxy"]
+
+[ext_resource type="Script" path="res://score_increment_ui.gd" id="1_d0xm1"]
+[ext_resource type="FontFile" uid="uid://c82ncppq1djt6" path="res://assets/Fonts/Sunflare.ttf" id="2_ga78m"]
+
+[node name="ScoreIncrementUI" type="Node2D"]
+script = ExtResource("1_d0xm1")
+
+[node name="container" type="RichTextLabel" parent="."]
+z_index = 30
+offset_right = 400.0
+offset_bottom = 193.0
+theme_override_fonts/normal_font = ExtResource("2_ga78m")
+theme_override_font_sizes/normal_font_size = 96
+text = "test"

@@ -24,3 +24,9 @@ signal close_credits
 signal on_score_changed
 
 signal on_restart_game
+
+signal increase_score_multiplier (amount: float)
+
+signal match_made (length: int)
+
+signal scoring_events_finished

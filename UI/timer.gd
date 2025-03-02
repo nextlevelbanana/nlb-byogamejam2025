@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 	
 func _update_timer() -> void:
 	var sec = fmod(timer, 60)
-	var min = timer / 60
+	var minute = timer / 60
 	var formatString = "%02d : %02d"
 	
 	var actualString = "[center]"
@@ -33,7 +33,7 @@ func _update_timer() -> void:
 	if( timer < 10.0 ):
 		actualString += "[pulse]"
 	
-	actualString += formatString % [min, sec]	
+	actualString += formatString % [minute, sec]	
 
 	if( timer < 10.0 ):
 		actualString += "[/pulse]"

@@ -18,9 +18,6 @@ func _ready() -> void:
 	initialize_grid()
 	SignalBus.connect("swap_selected", _on_swap_selected)
 
-func _process(delta: float) -> void:
-	pass
-	
 func _unhandled_key_input(event: InputEvent) -> void:
 	if is_input_locked: 
 		return
@@ -286,7 +283,7 @@ func _on_swap_selected():
 	
 	var columns_with_new_hats = get_new_completed_hats()
 	if columns_with_new_hats.size():
-		print("new hat found")
+		SignalBus.increase_score_multiplier.emit(1 * columns_with_new_hats.size())
 		lock_hats_in_columns(columns_with_new_hats)
 		check_for_game_over()
 	
@@ -296,35 +293,36 @@ func _on_swap_selected():
 	
 	#await get_tree().process_frame #todo: probably replace this with waiting for an animation to finish
 	if matches.size():
+		SignalBus.increase_score_multiplier.emit(1 * matches.size())
 		should_check_again = true
-		for m in matches:
-			for cell_coords in m:
-				await poof (cells[cell_coords.y][cell_coords.x].position)
-				cells[cell_coords.y][cell_coords.x].update_kind(null)
-		await refill_empty_cells()
+		await process_matches(matches)
 		
 	while should_check_again:
-		print("checking again")
 		await get_tree().process_frame
 		columns_with_new_hats = get_new_completed_hats()
-		print("columns with new hats?", columns_with_new_hats.size())
 		if columns_with_new_hats.size():
+			SignalBus.increase_score_multiplier.emit(1.3 * matches.size())
 			lock_hats_in_columns(columns_with_new_hats)
 			check_for_game_over()
 			
 		matches = get_matches()
-		print("matches found: %s" % matches.size())
 		if !matches.size():
 			should_check_again = false
 		else:
+			SignalBus.increase_score_multiplier.emit(1.3 * matches.size())
 			should_check_again = true
-			for m in matches:
-				for cell_coords in m:
-					await poof (cells[cell_coords.y][cell_coords.x].position)
-					cells[cell_coords.y][cell_coords.x].update_kind(null)
-			await refill_empty_cells()
+			await process_matches(matches)
 	
 	toggle_input_lock(false)
+	SignalBus.scoring_events_finished.emit()
+	
+func process_matches(matches):
+	for m in matches:
+		SignalBus.match_made.emit(m.size())
+		for cell_coords in m:
+			await poof (cells[cell_coords.y][cell_coords.x].position)
+			cells[cell_coords.y][cell_coords.x].update_kind(null)
+	await refill_empty_cells()
 
 func lock_hats_in_columns(col):
 	for h in col:
@@ -333,7 +331,7 @@ func lock_hats_in_columns(col):
 			var all_top_hat_pieces = get_completed_top_hat(h)
 			for piece in all_top_hat_pieces:
 				cells[piece.y][piece.x].update_lock(true)
-			SignalBus.top_hat_made.emit()
+			SignalBus.top_hat_made.emit(all_top_hat_pieces.size())
 		else:
 			SignalBus.bad_hat_made.emit()
 			cell.update_lock(true)

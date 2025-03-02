@@ -7,11 +7,7 @@ func _ready() -> void:
 	SignalBus.connect("bad_hat_made", _on_bad_hat_made)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-func _on_top_hat_made():
+func _on_top_hat_made(_height):
 	play("happy");
 	
 func _on_bad_hat_made(): 

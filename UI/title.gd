@@ -14,10 +14,6 @@ func _ready() -> void:
 	get_tree().paused = false
 	SignalBus.connect("on_restart_game", on_restart_game)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:	
-	pass
-
 func _unhandled_key_input(event: InputEvent) -> void:
 	if( areCreditsUp ):
 		return

@@ -28,11 +28,6 @@ func _ready() -> void:
 	SignalBus.connect("on_score_changed", _on_score_changed)
 	SignalBus.connect("on_restart_game", _on_restart_game)
 	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
 func _on_score_changed(points: int) -> void:
 	score += points
 
@@ -53,7 +48,7 @@ func _on_game_over():
 	ScoreboardScene.queue_free()
 	
 func _on_all_hats():
-	AllHatsScene.position = Vector2( 1900/2, 1080 * .667)
+	AllHatsScene.position = Vector2( int(1900/2), int(1080 * .667))
 	add_child(AllHatsScene)
 	await get_tree().create_timer(2.0).timeout
 	_on_game_over()

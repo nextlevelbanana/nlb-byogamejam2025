@@ -41,9 +41,6 @@ func _ready() -> void:
 	bgMusic.volume = currentVolume
 	bgMusic.start()
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func _play_audio_event(event_key):
 	
@@ -86,7 +83,7 @@ func _play_bad_hat_drop():
 func _play_undo():
 	_play_audio_event("undo")
 
-func _play_hat_complete():
+func _play_hat_complete(_height):
 	_play_audio_event("hat_complete")
 
 func play_judgy_abe():
